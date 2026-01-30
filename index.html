@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>De Todos Café - Menú Digital & Pedidos</title>
+
+  <meta name="description" content="Menú digital de De Todos Café. Pedidos por WhatsApp: Café, limonadas granizadas, sodas, granizados y combos. Delivery disponible.">
+  <meta name="keywords" content="café, menú digital, pedidos WhatsApp, limonadas, granizados, delivery, comida rápida, bebidas">
+  <meta name="author" content="De Todos Café">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{
+      --cafe-oscuro:#3b1f0f; --cafe-medio:#8B4513; --cafe-claro:#D2691E;
+      --whatsapp:#25D366; --texto:#2C1810; --acento:#FF6B35; --border:#E8D9C5;
+      --bg:#faf7f2;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter','Segoe UI',sans-serif;
+      background:linear-gradient(135deg,#f7f3ef 0%,#f0e6d6 100%);
+      color:var(--texto); line-height:1.6; min-height:100vh;
+    }
+
+    .header{
+      background:linear-gradient(to right,var(--cafe-oscuro),var(--cafe-medio));
+      color:#fff; text-align:center; padding:1.5rem 1rem;
+      position:sticky; top:0; z-index:1000;
+      box-shadow:0 4px 12px rgba(59,31,15,.2);
+    }
+    .logo{
+      font-family:'Poppins',sans-serif; font-size:2rem; font-weight:700;
+      display:flex; align-items:center; justify-content:center; gap:1rem;
+      margin-bottom:.5rem;
+    }
+    .logo i{color:var(--cafe-claro)}
+    .subtitle{font-size:1rem;opacity:.9}
+
+    .container{
+      max-width:1200px; margin:0 auto; padding:2rem 1rem;
+      display:grid; grid-template-columns:1fr; gap:2rem;
+    }
+    @media(min-width:1024px){.container{grid-template-columns:1fr 380px}}
+
+    .productos{display:flex;flex-direction:column;gap:2rem}
+
+    .categoria{
+      background:#fff; border-radius:15px; padding:1.5rem;
+      box-shadow:0 4px 12px rgba(0,0,0,.08);
+      border-left:4px solid var(--cafe-claro);
+    }
+    .titulo-categoria{
+      font-family:'Poppins',sans-serif; font-size:1.5rem; color:var(--cafe-oscuro);
+      margin-bottom:1.25rem; padding-bottom:.75rem; border-bottom:2px solid var(--border);
+      display:flex;align-items:center;gap:.75rem;
+    }
+    .titulo-categoria i{color:var(--cafe-claro)}
+
+    .grid-productos{
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:1rem;
+    }
+    @media(max-width:768px){.grid-productos{grid-template-columns:1fr}}
+
+    .producto{
+      background:var(--bg); border-radius:12px; padding:1.1rem;
+      border:1px solid var(--border); transition:all .3s ease;
+    }
+    .producto:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.1)}
+    .nombre-producto{font-weight:800;font-size:1.05rem;margin-bottom:.35rem;color:var(--cafe-oscuro)}
+    .subtitulo-producto{font-size:.9rem;color:#666;margin-bottom:.75rem}
+    .precio{font-weight:900;font-size:1.25rem;color:var(--acento);margin:.25rem 0 .9rem 0}
+
+    .fila{
+      display:flex; flex-direction:column; gap:.35rem;
+      margin:.6rem 0 .8rem 0;
+    }
+    .label-mini{font-size:.85rem;color:#666;font-weight:700}
+    select, input[type="text"], textarea{
+      width:100%;
+      padding:.65rem .75rem;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-family:inherit;
+      outline:none;
+    }
+    select:focus, input[type="text"]:focus, textarea:focus{
+      border-color:var(--cafe-claro);
+      box-shadow:0 0 0 3px rgba(210,105,30,.15);
+    }
+
+    .btn-agregar{
+      width:100%;
+      background:linear-gradient(to right,var(--cafe-medio),var(--cafe-claro));
+      color:#fff;border:none;padding:.75rem 1rem;border-radius:12px;
+      font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.6rem;
+      transition:all .3s;
+    }
+    .btn-agregar:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(139,69,19,.3)}
+
+    .panel-pedido{
+      background:#fff;border-radius:16px;padding:1.5rem;
+      box-shadow:0 4px 20px rgba(0,0,0,.1);
+      position:sticky;top:120px;height:fit-content;
+    }
+    .titulo-panel{
+      font-family:'Poppins',sans-serif;font-size:1.45rem;color:var(--cafe-oscuro);
+      margin-bottom:1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .badge-carrito{
+      background:var(--acento);color:#fff;width:24px;height:24px;border-radius:50%;
+      display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:900;
+      margin-left:.5rem;
+    }
+    .btn-vaciar{
+      background:transparent;border:1px solid var(--border);color:#666;
+      padding:.5rem .9rem;border-radius:12px;font-size:.85rem;font-weight:800;cursor:pointer;transition:all .3s;
+    }
+    .btn-vaciar:hover{background:#fee;border-color:#fcc;color:#c00}
+
+    .bloque-opciones{
+      border:1px dashed var(--border);
+      border-radius:14px;
+      padding:1rem;
+      margin-bottom:1.1rem;
+      background:#fffdfb;
+    }
+    .bloque-opciones .titulo-bloque{
+      font-weight:900;
+      color:var(--cafe-oscuro);
+      display:flex;
+      align-items:center;
+      gap:.5rem;
+      margin-bottom:.75rem;
+    }
+    .mini-ayuda{font-size:.85rem;color:#666;margin-top:.35rem}
+
+    .items-carrito{max-height:360px;overflow-y:auto;margin-bottom:1rem}
+    .item-carrito{
+      display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+      padding:.75rem;margin-bottom:.75rem;background:var(--bg);
+      border-radius:12px;border:1px solid var(--border);
+    }
+    .info-item{flex:1}
+    .nombre-item{font-weight:900;margin-bottom:.25rem}
+    .meta-item{font-size:.9rem;color:#666;display:flex;flex-direction:column;gap:.25rem}
+
+    .qty-row{display:flex;align-items:center;gap:.5rem;margin-top:.4rem}
+    .btn-qty{
+      width:30px;height:30px;border-radius:10px;border:1px solid var(--border);
+      background:#fff;cursor:pointer;font-weight:900;
+    }
+    .btn-qty:hover{border-color:var(--cafe-claro)}
+    .qty{min-width:22px;text-align:center;font-weight:900;color:var(--cafe-oscuro)}
+    .total-item{font-weight:900;color:var(--acento)}
+    .btn-x{
+      background:transparent;border:1px solid var(--border);border-radius:12px;
+      padding:.25rem .55rem;cursor:pointer;
+    }
+    .btn-x:hover{border-color:#fcc;background:#fee;color:#c00}
+
+    .total-pedido{border-top:2px solid var(--border);padding-top:1rem;margin-bottom:1rem}
+    .fila-total{display:flex;justify-content:space-between;margin-bottom:.55rem;font-size:1.02rem}
+    .monto-total{font-weight:900;font-size:1.35rem;color:var(--cafe-oscuro)}
+
+    .btn-whatsapp{
+      background:linear-gradient(to right,var(--whatsapp),#1da851);
+      color:#fff;border:none;width:100%;padding:1rem;border-radius:14px;
+      font-size:1.1rem;font-weight:900;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;gap:.75rem;
+      transition:all .3s; box-shadow:0 4px 16px rgba(37,211,102,.3);
+    }
+    .btn-whatsapp:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.4)}
+    .btn-whatsapp:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
+
+    .mensaje-vacio{text-align:center;padding:2rem;color:#999}
+    .mensaje-vacio i{font-size:3rem;margin-bottom:1rem;opacity:.3}
+
+    .footer{
+      background:linear-gradient(to right,var(--cafe-oscuro),var(--cafe-medio));
+      color:#fff;padding:2rem 1rem;margin-top:3rem;
+    }
+    .contenido-footer{max-width:1200px;margin:0 auto;text-align:center}
+    .contacto{font-size:1.05rem;margin-bottom:.75rem;font-weight:900}
+    .dirlocal{opacity:.9;margin-bottom:.75rem}
+    .horario{font-style:italic;margin-bottom:1rem;opacity:.9}
+    .creditos{font-size:.9rem;opacity:.8;margin-top:1rem}
+
+    .items-carrito::-webkit-scrollbar{width:6px}
+    .items-carrito::-webkit-scrollbar-track{background:#f1f1f1;border-radius:3px}
+    .items-carrito::-webkit-scrollbar-thumb{background:var(--cafe-claro);border-radius:3px}
+
+    @media(max-width:768px){
+      .logo{font-size:1.5rem}
+      .container{padding:1rem;grid-template-columns:1fr}
+      .panel-pedido{position:static;margin-top:2rem}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <i class="fas fa-coffee"></i>
+      <span>De Todos Café</span>
+    </div>
+    <p class="subtitle">Menú Digital & Pedidos por WhatsApp</p>
+  </header>
+
+  <main class="container">
+    <section class="productos" id="productos"></section>
+
+    <aside class="panel-pedido">
+      <div class="titulo-panel">
+        <span>
+          <i class="fas fa-shopping-cart"></i>
+          Tu Pedido
+          <span class="badge-carrito" id="badgeCarrito">0</span>
+        </span>
+        <button class="btn-vaciar" id="btnVaciar">
+          <i class="fas fa-trash"></i> Vaciar
+        </button>
+      </div>
+
+      <!-- OPCIONES DEL PEDIDO -->
+      <div class="bloque-opciones">
+        <div class="titulo-bloque">
+          <i class="fas fa-sliders"></i> Datos del pedido
+        </div>
+
+        <div class="fila">
+          <div class="label-mini">Tipo de pedido</div>
+          <select id="tipoPedido">
+            <option value="domicilio">Domicilio</option>
+            <option value="para_llevar">Para llevar</option>
+            <option value="consumir_local">Consumir en el local</option>
+          </select>
+          <div class="mini-ayuda" id="ayudaEmpaque">
+            <i class="fas fa-info-circle"></i> Para llevar / Domicilio: se suma $1.000 por empaque.
+          </div>
+        </div>
+
+        <div class="fila" id="filaDireccionEntrega" style="display:block;">
+          <div class="label-mini">Dirección (solo si es domicilio)</div>
+          <input id="direccionEntrega" type="text" placeholder="Ej: Calle 12 #34-56, Barrio..." />
+        </div>
+
+        <div class="fila">
+          <div class="label-mini">Forma de pago</div>
+          <select id="formaPago">
+            <option value="nequi">Nequi</option>
+            <option value="efectivo">Efectivo</option>
+          </select>
+          <div class="mini-ayuda" id="detallePago">
+            <i class="fas fa-money-bill-wave"></i>
+            Nequi: 3222096301 — Vigny Valencia
+          </div>
+        </div>
+
+        <div class="fila">
+          <div class="label-mini">Nombre de quien recoge (mesa / para llevar / domicilio)</div>
+          <input id="nombreCliente" type="text" placeholder="Ej: Juan Pérez" />
+        </div>
+
+        <div class="mini-ayuda">
+          <i class="fas fa-clock"></i> Tiempo estimado de preparación: <b>30 minutos</b>.
+        </div>
+      </div>
+
+      <!-- ITEMS -->
+      <div class="items-carrito" id="itemsCarrito">
+        <div class="mensaje-vacio">
+          <i class="fas fa-shopping-cart"></i>
+          <p>Tu carrito está vacío</p>
+          <p>Agrega productos para comenzar</p>
+        </div>
+      </div>
+
+      <!-- TOTALES -->
+      <div class="total-pedido">
+        <div class="fila-total">
+          <span>Subtotal:</span>
+          <span id="subtotal">$0</span>
+        </div>
+        <div class="fila-total">
+          <span>Envío:</span>
+          <span id="envio">$0</span>
+        </div>
+        <div class="fila-total">
+          <span>Empaque:</span>
+          <span id="empaque">$0</span>
+        </div>
+        <div class="fila-total monto-total">
+          <span>Total:</span>
+          <span id="total">$0</span>
+        </div>
+      </div>
+
+      <button class="btn-whatsapp" id="btnWhatsapp" disabled>
+        <i class="fab fa-whatsapp"></i>
+        Pedir por WhatsApp
+      </button>
+
+      <p style="text-align:center;margin-top:1rem;font-size:.9rem;color:#666;">
+        <i class="fas fa-info-circle"></i> Al hacer clic se abrirá WhatsApp con tu pedido listo
+      </p>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="contenido-footer">
+      <p class="contacto">
+        <i class="fas fa-phone"></i> 
+        Pedidos: <a href="tel:+573222096301" style="color:white;text-decoration:underline">322 2096301</a>
+      </p>
+      <p class="dirlocal">
+        <i class="fas fa-location-dot"></i> 
+        <span id="localDireccionFooter">Ubicación variable - Consultar al hacer pedido</span>
+      </p>
+      <p class="horario"><i class="fas fa-clock"></i> Lunes a Domingo: 8:00 AM - 8:00 PM</p>
+      <p class="creditos">© 2026 De Todos Café. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ==================== CONFIGURACIÓN ====================
+    const CONFIG = {
+      telefonoWhatsApp: "573222096301",
+      tiempoEstimadoMin: 30,
+      costoEnvioBase: 3000,         // si no manejas envío, pon 0
+      envioGratisDesde: 25000,      // si no quieres envío gratis, pon un número muy alto
+      costoEmpaque: 1000,           // plástico / empaque para llevar o domicilio
+      nequi: { numero: "3222096301", titular: "Vigny Valencia" },
+      localDireccion: "📍 Ubicación variable - Consultar disponibilidad al hacer pedido"
+    };
+
+    // ==================== MENÚ (tu carta completa) ====================
+    const menuData = {
+      categorias: [
+        {
+          id: "limonadas",
+          nombre: "Limonadas Granizadas",
+          icono: "glass-whiskey",
+          agruparVariantes: true,
+          productos: [
+            { id: 1, nombre: "Mango sal pimienta", precio: 10000 },
+            { id: 2, nombre: "Mango hierbabuena", precio: 11000 },
+            { id: 3, nombre: "Mango + piña", precio: 11000 },
+            { id: 4, nombre: "Mango maracuyá", precio: 11000 },
+            { id: 5, nombre: "Mango lulo", precio: 12000 },
+            { id: 6, nombre: "Mango mandarina", precio: 12000 },
+            { id: 7, nombre: "Mango naranja", precio: 12000 },
+            { id: 8, nombre: "Mango + mandarina + manzana", precio: 13000 },
+            { id: 9, nombre: "Mango + piña + maracuyá", precio: 13000 },
+            { id: 10, nombre: "Maracuyá", precio: 10000 },
+            { id: 11, nombre: "Maracuyá + hierbabuena", precio: 11000 },
+            { id: 12, nombre: "Lulo", precio: 11000 },
+            { id: 13, nombre: "Lulo hierbabuena", precio: 12000 },
+            { id: 14, nombre: "Cereza", precio: 11000 },
+            { id: 15, nombre: "Cereza + hierbabuena", precio: 12000 },
+            { id: 16, nombre: "Fresa + limón", precio: 11000 },
+            { id: 17, nombre: "Limón + hierbabuena", precio: 7000 },
+            { id: 18, nombre: "Manzana", precio: 10000 },
+            { id: 19, nombre: "Manzana + hierbabuena", precio: 11000 },
+            { id: 20, nombre: "Piña", precio: 10000 },
+            { id: 21, nombre: "Piña + hierbabuena", precio: 11000 },
+            { id: 22, nombre: "Mora + fresas", precio: 12000 },
+            { id: 23, nombre: "Mora", precio: 10000 },
+            { id: 24, nombre: "Uva", precio: 10000 },
+            { id: 25, nombre: "Naranja", precio: 10000 },
+            { id: 26, nombre: "Naranja + hierbabuena", precio: 11000 },
+            { id: 27, nombre: "Mandarina", precio: 11000 },
+            { id: 28, nombre: "Coco", precio: 13000 }
+          ]
+        },
+        {
+          id: "sodas",
+          nombre: "Sodas",
+          icono: "glass-cheers",
+          productos: [
+            { id: 29, nombre: "Limón + sal", precio: 6000 },
+            { id: 30, nombre: "Soda michelada de Mango", precio: 11000 },
+            { id: 31, nombre: "Frutos amarillos", precio: 11000 },
+            { id: 32, nombre: "Frutos rojos", precio: 11000 },
+            { id: 33, nombre: "Cereza hierbabuena", precio: 11000 },
+            { id: 34, nombre: "Manzana verde", precio: 11000 },
+            { id: 35, nombre: "Michelada de ginger", precio: 11000 }
+          ]
+        },
+        {
+          id: "granizados",
+          nombre: "Granizados",
+          icono: "snowflake",
+          productos: [
+            { id: 36, nombre: "Milo", precio: 10000 },
+            { id: 37, nombre: "Milo nevado", precio: 11000 },
+            { id: 38, nombre: "Oreo", precio: 11000 },
+            { id: 39, nombre: "Oreo nevado", precio: 12000 },
+            { id: 40, nombre: "Café", precio: 10000 },
+            { id: 41, nombre: "Café nevado", precio: 11000 },
+            { id: 42, nombre: "Frapuchino", precio: 12000 },
+            { id: 43, nombre: "Frapuchino nevado", precio: 13000 },
+            { id: 44, nombre: "Frapuchino whisky", precio: 14000 }
+          ]
+        },
+        {
+          id: "cremosos",
+          nombre: "Cremosos",
+          icono: "ice-cream",
+          productos: [
+            { id: 45, nombre: "Cremoso maracuyá", precio: 11000 },
+            { id: 46, nombre: "Cremoso mora", precio: 11000 },
+            { id: 47, nombre: "Cremoso uva", precio: 11000 },
+            { id: 48, nombre: "Cremoso fresa", precio: 11000 },
+            { id: 49, nombre: "Cremoso frutos rojos", precio: 12000 }
+          ]
+        },
+        {
+          id: "bebidas_calientes",
+          nombre: "Bebidas calientes",
+          icono: "mug-hot",
+          productos: [
+            { id: 50, nombre: "Café de la casa", precio: 1500 },
+            { id: 51, nombre: "Americano", precio: 3000 },
+            { id: 52, nombre: "Café en prensa", precio: 6000 },
+            { id: 53, nombre: "Expreso", precio: 3000 },
+            { id: 54, nombre: "Carajillo", precio: 5000 },
+            { id: 55, nombre: "Perico", precio: 1500 },
+            { id: 56, nombre: "Café con leche", precio: 2000 },
+            { id: 57, nombre: "Espumoso", precio: 7000 },
+            { id: 58, nombre: "Café bombón", precio: 7000 },
+            { id: 59, nombre: "Capuchino whisky", precio: 7000 },
+            { id: 60, nombre: "Capuchino oreo", precio: 7000 },
+            { id: 61, nombre: "Capuchino masmelo", precio: 7000 },
+            { id: 62, nombre: "Milo caliente", precio: 6000 }
+          ]
+        },
+        {
+          id: "infusiones",
+          nombre: "Infusiones y aromáticas",
+          icono: "leaf",
+          productos: [
+            { id: 63, nombre: "Aromática de panela", precio: 2000 },
+            { id: 64, nombre: "Infusión de hierbabuena", precio: 1500 },
+            { id: 65, nombre: "Infusión de flor de Jamaica", precio: 2000 },
+            { id: 66, nombre: "Aromática de frutos rojos (opcional hierbabuena o clavos y canela)", precio: 5000 },
+            { id: 67, nombre: "Aromática de frutas amarilla (opcional hierbabuena o clavos y canela)", precio: 5000 }
+          ]
+        },
+        {
+          id: "combos",
+          nombre: "Combos especiales",
+          icono: "gift",
+          productos: [
+            { id: 68, nombre: "Agua panela + pan + roscas + queso", precio: 10000 },
+            { id: 69, nombre: "Milo + pan + roscas + queso", precio: 11000 },
+            { id: 70, nombre: "Migao de chocolate", precio: 11000 },
+            { id: 71, nombre: "Migao de milo", precio: 12000 }
+          ]
+        }
+      ]
+    };
+
+    // ==================== UTILIDADES ====================
+    const money = (n) => `$${Number(n || 0).toLocaleString("es-CO")}`;
+    const normalizeSpaces = (s) => (s || "").replace(/\s+/g, " ").trim();
+
+    function extraerBase(nombre){
+      const n = normalizeSpaces(nombre);
+      const plusIdx = n.indexOf(" + ");
+      if (plusIdx > 0) return n.slice(0, plusIdx).trim();
+      return n.split(" ")[0].trim();
+    }
+
+    function extraerVariante(nombre, base){
+      let v = normalizeSpaces(nombre);
+      if (v.toLowerCase().startsWith(base.toLowerCase())) v = v.slice(base.length).trim();
+      return v ? v : "Normal";
+    }
+
+    function agruparProductosEnVariantes(productos){
+      const grupos = new Map();
+      productos.forEach(p => {
+        const base = extraerBase(p.nombre);
+        const varTxt = extraerVariante(p.nombre, base);
+        if (!grupos.has(base)){
+          grupos.set(base, {
+            base,
+            virtualId: "v_" + base.toLowerCase().replace(/\s+/g,"_").replace(/[^\wáéíóúñ_]/gi,""),
+            variantes: []
+          });
+        }
+        grupos.get(base).variantes.push({
+          idOriginal: p.id,
+          etiqueta: varTxt,
+          precio: p.precio,
+          nombreCompleto: p.nombre
+        });
+      });
+      const res = Array.from(grupos.values());
+      res.forEach(g => g.variantes.sort((a,b)=>a.precio-b.precio));
+      res.sort((a,b)=>a.base.localeCompare(b.base,'es'));
+      return res;
+    }
+
+    // ==================== CARRITO ====================
+    class CarritoDeCompras {
+      constructor(){
+        this.items = new Map();
+        this.subtotal = 0;
+        this.envio = 0;
+        this.empaque = 0;
+        this.total = 0;
+        this.totalItems = 0;
+        this.storageKey = "carritoDeTodosCafe_prod";
+
+        this.cacheDom();
+        this.init();
+      }
+
+      cacheDom(){
+        this.elProductos = document.getElementById("productos");
+        this.elItemsCarrito = document.getElementById("itemsCarrito");
+        this.elBadge = document.getElementById("badgeCarrito");
+        this.elSubtotal = document.getElementById("subtotal");
+        this.elEnvio = document.getElementById("envio");
+        this.elEmpaque = document.getElementById("empaque");
+        this.elTotal = document.getElementById("total");
+        this.btnVaciar = document.getElementById("btnVaciar");
+        this.btnWhatsapp = document.getElementById("btnWhatsapp");
+
+        this.selTipo = document.getElementById("tipoPedido");
+        this.selPago = document.getElementById("formaPago");
+        this.inpNombre = document.getElementById("nombreCliente");
+        this.inpDireccion = document.getElementById("direccionEntrega");
+        this.filaDireccion = document.getElementById("filaDireccionEntrega");
+        this.detallePago = document.getElementById("detallePago");
+        this.footerDir = document.getElementById("localDireccionFooter");
+      }
+
+      init(){
+        this.footerDir.textContent = CONFIG.localDireccion;
+
+        this.loadFromStorage();
+        this.renderMenu();
+        this.attachEventListeners();
+        this.updateUI();
+
+        // Configurar eventos para actualizar precios al cambiar variantes
+        this.setupVarianteListeners();
+
+        // Instrucciones solo una vez
+        setTimeout(() => {
+          if (!localStorage.getItem("instruccionesVistasDeTodosCafe")){
+            alert("💡 Cómo pedir:\n1) Agrega productos\n2) Elige tipo de pedido y forma de pago\n3) Escribe el nombre\n4) Clic en 'Pedir por WhatsApp'\n\n¡Listo!");
+            localStorage.setItem("instruccionesVistasDeTodosCafe", "true");
+          }
+        }, 700);
+      }
+
+      setupVarianteListeners(){
+        // Este método se llama después de renderMenu
+        // para agregar listeners a los selects de variantes
+        document.querySelectorAll('select[id^="sel_"]').forEach(select => {
+          select.addEventListener('change', function() {
+            const precioRef = this.options[this.selectedIndex].dataset.precio;
+            const precioElement = this.closest('.producto').querySelector('.precio');
+            if (precioElement) precioElement.textContent = money(precioRef);
+          });
+        });
+      }
+
+      attachEventListeners(){
+        // Vaciar
+        this.btnVaciar.addEventListener("click", () => {
+          if (this.items.size === 0) return;
+          if (confirm("¿Seguro que deseas vaciar el carrito?")){
+            this.items.clear();
+            this.saveToStorage();
+            this.updateUI();
+          }
+        });
+
+        // WhatsApp con validación
+        this.btnWhatsapp.addEventListener("click", () => {
+          if (this.items.size === 0) return;
+          
+          // Validación de nombre
+          const nombre = normalizeSpaces(this.inpNombre.value);
+          if (!nombre) {
+            alert("Por favor escribe tu nombre en 'Datos del pedido'");
+            this.inpNombre.focus();
+            return;
+          }
+          
+          // Validación de dirección para domicilio
+          if (this.selTipo.value === "domicilio") {
+            const direccion = normalizeSpaces(this.inpDireccion.value);
+            if (!direccion) {
+              alert("Para domicilio, por favor escribe tu dirección");
+              this.inpDireccion.focus();
+              return;
+            }
+          }
+          
+          const msg = this.buildWhatsAppMessage();
+          const url = `https://wa.me/${CONFIG.telefonoWhatsApp}?text=${encodeURIComponent(msg)}`;
+          window.open(url, "_blank");
+        });
+
+        // Tipo de pedido
+        this.selTipo.addEventListener("change", () => {
+          this.applyTipoPedidoUI();
+        });
+
+        // Forma de pago
+        this.selPago.addEventListener("change", () => {
+          this.applyPagoUI();
+        });
+
+        // Inputs (nombre / dirección)
+        this.inpNombre.addEventListener("input", () => this.updateUI(false));
+        this.inpDireccion.addEventListener("input", () => this.updateUI(false));
+
+        // Delegación: botones del menú (agregar)
+        this.elProductos.addEventListener("click", (e) => {
+          const btn = e.target.closest("[data-action='add']");
+          if (!btn) return;
+
+          const tipo = btn.dataset.tipo;
+          if (tipo === "simple"){
+            const id = Number(btn.dataset.id);
+            const prod = this.findProductById(id);
+            if (!prod) return;
+            this.addItem(prod.id, prod.nombre, prod.precio, 1);
+            return;
+          }
+
+          if (tipo === "variante"){
+            const selectId = btn.dataset.select;
+            const sel = document.getElementById(selectId);
+            if (!sel) return;
+            const idOriginal = Number(sel.value);
+            const nombre = sel.options[sel.selectedIndex]?.dataset?.nombre || sel.options[sel.selectedIndex]?.textContent || "Producto";
+            const precio = Number(sel.options[sel.selectedIndex]?.dataset?.precio || 0);
+
+            this.addItem(idOriginal, nombre, precio, 1);
+            return;
+          }
+        });
+
+        // Delegación: carrito (+/-/x)
+        this.elItemsCarrito.addEventListener("click", (e) => {
+          const btn = e.target.closest("button[data-cart]");
+          if (!btn) return;
+          const action = btn.dataset.cart;
+          const id = Number(btn.dataset.id);
+          if (!id) return;
+
+          if (action === "inc") this.changeQty(id, 1);
+          if (action === "dec") this.changeQty(id, -1);
+          if (action === "del") this.removeItem(id);
+        });
+
+        // Estado inicial de UI
+        this.applyTipoPedidoUI();
+        this.applyPagoUI();
+      }
+
+      applyTipoPedidoUI(){
+        const t = this.selTipo.value;
+        // Dirección solo si domicilio
+        this.filaDireccion.style.display = (t === "domicilio") ? "block" : "none";
+        if (t !== "domicilio") this.inpDireccion.value = "";
+
+        // Actualizar totales inmediatamente
+        this.updateTotals();
+        this.updateUI(false);
+      }
+
+      applyPagoUI(){
+        const p = this.selPago.value;
+        if (p === "nequi"){
+          this.detallePago.innerHTML = `<i class="fas fa-money-bill-wave"></i> Nequi: <b>${CONFIG.nequi.numero}</b> — ${CONFIG.nequi.titular}`;
+        } else {
+          this.detallePago.innerHTML = `<i class="fas fa-money-bill-wave"></i> Pago en efectivo (al recibir / en caja)`;
+        }
+      }
+
+      renderMenu(){
+        this.elProductos.innerHTML = "";
+        menuData.categorias.forEach(cat => {
+          const productosHTML = (cat.agruparVariantes)
+            ? this.renderCategoriaAgrupada(cat)
+            : this.renderCategoriaSimple(cat);
+
+          const wrap = document.createElement("div");
+          wrap.className = "categoria";
+          wrap.innerHTML = `
+            <h2 class="titulo-categoria">
+              <i class="fas fa-${cat.icono}"></i>
+              ${cat.nombre}
+            </h2>
+            <div class="grid-productos">
+              ${productosHTML}
+            </div>
+          `;
+          this.elProductos.appendChild(wrap);
+        });
+        
+        // Llamar a setupVarianteListeners después de renderizar
+        setTimeout(() => this.setupVarianteListeners(), 100);
+      }
+
+      renderCategoriaSimple(cat){
+        return cat.productos.map(p => `
+          <div class="producto">
+            <div class="nombre-producto">${p.nombre}</div>
+            <div class="precio">${money(p.precio)}</div>
+            <button class="btn-agregar" data-action="add" data-tipo="simple" data-id="${p.id}">
+              <i class="fas fa-cart-plus"></i> Agregar
+            </button>
+          </div>
+        `).join("");
+      }
+
+      renderCategoriaAgrupada(cat){
+        const grupos = agruparProductosEnVariantes(cat.productos);
+        return grupos.map(g => {
+          const selectId = `sel_${cat.id}_${g.virtualId}`;
+          const options = g.variantes.map(v => `
+            <option value="${v.idOriginal}" data-precio="${v.precio}" data-nombre="${v.nombreCompleto}">
+              ${v.etiqueta} — ${money(v.precio)}
+            </option>
+          `).join("");
+
+          // Mostrar el precio de la primera opción como referencia
+          const precioRef = g.variantes[0]?.precio || 0;
+
+          return `
+            <div class="producto">
+              <div class="nombre-producto">${g.base}</div>
+              <div class="subtitulo-producto">Elige tu combinación</div>
+
+              <div class="fila">
+                <div class="label-mini">Variante</div>
+                <select id="${selectId}">
+                  ${options}
+                </select>
+              </div>
+
+              <div class="precio">${money(precioRef)}</div>
+
+              <button class="btn-agregar" data-action="add" data-tipo="variante" data-select="${selectId}">
+                <i class="fas fa-cart-plus"></i> Agregar
+              </button>
+            </div>
+          `;
+        }).join("");
+      }
+
+      // ------- Carrito operations -------
+      addItem(id, nombre, precio, qty){
+        const current = this.items.get(id);
+        if (current){
+          current.cantidad += qty;
+          this.items.set(id, current);
+        } else {
+          this.items.set(id, { id, nombre, precio, cantidad: qty });
+        }
+        this.saveToStorage();
+        this.updateUI();
+        this.toast("✅ Producto agregado al carrito");
+      }
+
+      changeQty(id, delta){
+        const it = this.items.get(id);
+        if (!it) return;
+        it.cantidad += delta;
+        if (it.cantidad <= 0) this.items.delete(id);
+        else this.items.set(id, it);
+        this.saveToStorage();
+        this.updateUI();
+      }
+
+      removeItem(id){
+        if (!this.items.has(id)) return;
+        this.items.delete(id);
+        this.saveToStorage();
+        this.updateUI();
+        this.toast("🗑️ Producto eliminado");
+      }
+
+      // ------- Totals -------
+      updateTotals(){
+        this.subtotal = 0;
+        this.totalItems = 0;
+
+        this.items.forEach(it => {
+          this.subtotal += (it.precio * it.cantidad);
+          this.totalItems += it.cantidad;
+        });
+
+        // Envío (solo si es domicilio)
+        const tipo = this.selTipo.value;
+        if (tipo === "domicilio"){
+          this.envio = (this.subtotal >= CONFIG.envioGratisDesde) ? 0 : CONFIG.costoEnvioBase;
+        } else {
+          this.envio = 0;
+        }
+
+        // Empaque (+$1.000) si es domicilio o para llevar
+        if (tipo === "domicilio" || tipo === "para_llevar"){
+          this.empaque = (this.totalItems > 0) ? CONFIG.costoEmpaque : 0;
+        } else {
+          this.empaque = 0;
+        }
+
+        this.total = this.subtotal + this.envio + this.empaque;
+      }
+
+      // ------- UI -------
+      updateUI(reRenderCart = true){
+        this.updateTotals();
+
+        this.elBadge.textContent = String(this.totalItems);
+        this.elSubtotal.textContent = money(this.subtotal);
+        this.elEnvio.textContent = this.envio === 0 ? "Gratis" : money(this.envio);
+        this.elEmpaque.textContent = money(this.empaque);
+        this.elTotal.textContent = money(this.total);
+
+        // Habilitar botón WhatsApp solo si hay items
+        this.btnWhatsapp.disabled = (this.totalItems === 0);
+
+        // Render carrito
+        if (reRenderCart) this.renderCart();
+
+        // Título dinámico
+        document.title = `De Todos Café ${this.totalItems ? `(${this.totalItems})` : ""} - Menú Digital`;
+      }
+
+      renderCart(){
+        if (this.items.size === 0){
+          this.elItemsCarrito.innerHTML = `
+            <div class="mensaje-vacio">
+              <i class="fas fa-shopping-cart"></i>
+              <p>Tu carrito está vacío</p>
+              <p>Agrega productos para comenzar</p>
+            </div>
+          `;
+          return;
+        }
+
+        let html = "";
+        this.items.forEach(it => {
+          const totalIt = it.precio * it.cantidad;
+          html += `
+            <div class="item-carrito">
+              <div class="info-item">
+                <div class="nombre-item">${it.nombre}</div>
+                <div class="meta-item">
+                  <div>Unitario: <b>${money(it.precio)}</b></div>
+                  <div class="qty-row">
+                    <button class="btn-qty" data-cart="dec" data-id="${it.id}">-</button>
+                    <span class="qty">${it.cantidad}</span>
+                    <button class="btn-qty" data-cart="inc" data-id="${it.id}">+</button>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;">
+                <div class="total-item">${money(totalIt)}</div>
+                <button class="btn-x" data-cart="del" data-id="${it.id}">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        });
+
+        this.elItemsCarrito.innerHTML = html;
+      }
+
+      // ------- WhatsApp Message (COMPLETA) -------
+      buildWhatsAppMessage(){
+        const tipo = this.selTipo.value;
+        const pago = this.selPago.value;
+        const nombre = normalizeSpaces(this.inpNombre.value);
+        const direccion = normalizeSpaces(this.inpDireccion.value);
+
+        const tipoTxt =
+          tipo === "domicilio" ? "Domicilio" :
+          tipo === "para_llevar" ? "Para llevar" :
+          "Consumir en el local";
+
+        const pagoTxt =
+          pago === "nequi" ? `Nequi (${CONFIG.nequi.numero} - ${CONFIG.nequi.titular})` :
+          "Efectivo";
+
+        let msg = `¡Hola! Quisiera hacer un pedido en *De Todos Café* ☕️\n\n`;
+        msg += `🧾 *DATOS DEL PEDIDO*\n`;
+        msg += `• Tipo: *${tipoTxt}*\n`;
+        msg += `• Forma de pago: *${pagoTxt}*\n`;
+        msg += `• Nombre: *${nombre}*\n`;
+
+        if (tipo === "domicilio"){
+          msg += `• Dirección: *${direccion}*\n`;
+        }
+
+        msg += `• Tiempo estimado: *${CONFIG.tiempoEstimadoMin} min*\n`;
+        msg += `• ${CONFIG.localDireccion}\n`;
+        msg += `\n`;
+
+        msg += `📋 *MI PEDIDO*\n`;
+        let i = 1;
+        this.items.forEach(it => {
+          const lineTotal = it.precio * it.cantidad;
+          msg += `${i}. ${it.nombre}\n`;
+          msg += `   Cantidad: ${it.cantidad}\n`;
+          msg += `   Unitario: ${money(it.precio)}\n`;
+          msg += `   Subtotal: ${money(lineTotal)}\n\n`;
+          i++;
+        });
+
+        msg += `———————————————\n`;
+        msg += `💰 Subtotal: ${money(this.subtotal)}\n`;
+        msg += `🚚 Envío: ${this.envio === 0 ? "Gratis" : money(this.envio)}\n`;
+        msg += `🧴 Empaque: ${money(this.empaque)}\n`;
+        msg += `✅ Total a pagar: *${money(this.total)}*\n`;
+        msg += `———————————————\n\n`;
+        msg += `¿Me confirmas disponibilidad y hora aproximada? ¡Gracias! 🙌`;
+
+        return msg;
+      }
+
+      // ------- Storage -------
+      saveToStorage(){
+        const arr = Array.from(this.items.values());
+        localStorage.setItem(this.storageKey, JSON.stringify(arr));
+      }
+
+      loadFromStorage(){
+        try{
+          const raw = localStorage.getItem(this.storageKey);
+          if (!raw) return;
+          const arr = JSON.parse(raw);
+          if (!Array.isArray(arr)) return;
+          arr.forEach(it => {
+            if (it && it.id && it.nombre && typeof it.precio === "number" && typeof it.cantidad === "number"){
+              this.items.set(Number(it.id), { ...it, id: Number(it.id) });
+            }
+          });
+        }catch(e){
+          console.error("Storage error:", e);
+          localStorage.removeItem(this.storageKey);
+        }
+      }
+
+      // ------- Helpers -------
+      findProductById(id){
+        for (const cat of menuData.categorias){
+          const p = cat.productos?.find(x => x.id === id);
+          if (p) return p;
+        }
+        return null;
+      }
+
+      toast(text){
+        const el = document.createElement("div");
+        el.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0, 100, 0, 0.9);
+          color: white;
+          padding: 12px 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          z-index: 9999;
+          font-weight: 600;
+          max-width: 90%;
+          text-align: center;
+        `;
+        el.textContent = text;
+        document.body.appendChild(el);
+        setTimeout(() => {
+          el.style.opacity = "0";
+          el.style.transition = "opacity 0.3s ease";
+          setTimeout(() => el.remove(), 300);
+        }, 2000);
+      }
+    }
+
+    // ==================== INIT ====================
+    let carrito;
+    document.addEventListener("DOMContentLoaded", () => {
+      carrito = new CarritoDeCompras();
+      window.carrito = carrito; // Para depuración si es necesario
+    });
+  </script>
+</body>
+</html>
