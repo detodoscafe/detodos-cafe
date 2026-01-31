@@ -48,19 +48,103 @@
       max-width:1400px; margin:0 auto; padding:1.5rem 1rem;
     }
 
-    .productos{display:flex;flex-direction:column;gap:1.5rem}
+    /* MENÚ DE CATEGORÍAS FIJAS EN LATERAL IZQUIERDO */
+    .menu-categorias {
+      position: fixed;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      padding: 1rem;
+      z-index: 900;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 70vh;
+      overflow-y: auto;
+      width: 200px;
+      display: none; /* Oculto por defecto en móvil */
+    }
 
-    .categoria{
-      background:#fff; border-radius:12px; padding:1.2rem;
-      box-shadow:0 3px 10px rgba(0,0,0,.06);
-      border-left:4px solid var(--cafe-claro);
+    @media(min-width:1024px){
+      .menu-categorias {
+        display: flex;
+      }
+      .container {
+        margin-left: 240px; /* Espacio para menú lateral */
+      }
     }
-    .titulo-categoria{
-      font-family:'Poppins',sans-serif; font-size:1.3rem; color:var(--cafe-oscuro);
-      margin-bottom:1rem; padding-bottom:0.6rem; border-bottom:2px solid var(--border);
-      display:flex;align-items:center;gap:.6rem;
+
+    .categoria-btn {
+      background: transparent;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+      color: var(--texto);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.9rem;
     }
-    .titulo-categoria i{color:var(--cafe-claro)}
+
+    .categoria-btn:hover,
+    .categoria-btn.activa {
+      background: linear-gradient(to right, var(--cafe-claro), var(--cafe-medio));
+      color: #fff;
+    }
+
+    .categoria-btn i {
+      width: 20px;
+      text-align: center;
+    }
+
+    /* BOTÓN PARA MOSTRAR CATEGORÍAS EN MÓVIL */
+    .btn-categorias-movil {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      background: linear-gradient(to right, var(--cafe-medio), var(--cafe-claro));
+      color: #fff;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 999;
+      box-shadow: 0 4px 15px rgba(139,69,19,0.3);
+      display: none;
+    }
+
+    @media(max-width:1023px){
+      .btn-categorias-movil {
+        display: flex;
+      }
+    }
+
+    /* CONTENIDO DE CATEGORÍAS */
+    .categoria-contenido {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .categoria-contenido.activa {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     .grid-productos{
       display:grid; grid-template-columns:repeat(2, 1fr);
@@ -91,20 +175,16 @@
     }
     .btn-agregar:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(139,69,19,.25)}
 
-    /* BOTÓN WHATSAPP FLOTANTE */
-    .whatsapp-flotante {
+    /* BOTÓN CARRITO FLOTANTE - MEJORADO */
+    .carrito-boton-flotante {
       position: fixed;
       bottom: 20px;
       right: 20px;
       z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-end;
     }
 
-    .btn-whatsapp-flotante {
-      background: linear-gradient(to right, var(--whatsapp), #1da851);
+    .btn-carrito-flotante {
+      background: linear-gradient(to right, var(--cafe-medio), var(--cafe-claro));
       color: #fff;
       border: none;
       padding: 1rem 1.5rem;
@@ -117,23 +197,27 @@
       justify-content: center;
       gap: 0.6rem;
       transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-      min-width: 220px;
+      box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+      min-width: 200px;
       position: relative;
-      animation: pulse 2s infinite;
     }
 
-    .btn-whatsapp-flotante:hover:not(:disabled) {
+    @media(max-width:768px){
+      .btn-carrito-flotante {
+        min-width: 60px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        padding: 0;
+      }
+      .btn-carrito-flotante span {
+        display: none;
+      }
+    }
+
+    .btn-carrito-flotante:hover {
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    }
-
-    .btn-whatsapp-flotante:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-      animation: none;
+      box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
     }
 
     .badge-carrito-flotante {
@@ -154,10 +238,14 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    @media(max-width:768px){
+      .badge-carrito-flotante {
+        top: -5px;
+        right: -5px;
+        width: 22px;
+        height: 22px;
+        font-size: 0.7rem;
+      }
     }
 
     /* CARRITO FLOTANTE */
@@ -172,7 +260,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       z-index: 9998;
       overflow: hidden;
-      display: none; /* Inicialmente oculto */
+      display: none;
       transition: all 0.3s ease;
       border: 1px solid var(--border);
     }
@@ -247,7 +335,7 @@
     }
 
     .items-carrito-flotante {
-      max-height: 300px;
+      max-height: 200px;
       overflow-y: auto;
       margin-bottom: 1rem;
     }
@@ -411,6 +499,38 @@
       opacity: 0.3;
     }
 
+    /* BOTÓN WHATSAPP DENTRO DEL CARRITO */
+    .btn-whatsapp-carrito {
+      background: linear-gradient(to right, var(--whatsapp), #1da851);
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+      margin-top: 1rem;
+    }
+
+    .btn-whatsapp-carrito:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    }
+
+    .btn-whatsapp-carrito:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
     /* Overlay para cerrar carrito */
     .overlay-carrito {
       position: fixed;
@@ -441,6 +561,29 @@
       border-radius: 3px;
     }
 
+    /* MENÚ CATEGORÍAS MÓVIL */
+    .menu-categorias-movil {
+      position: fixed;
+      bottom: 150px;
+      left: 20px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+      padding: 1rem;
+      z-index: 998;
+      display: none;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+      width: 250px;
+    }
+
+    .menu-categorias-movil.abierto {
+      display: flex;
+      animation: slideUp 0.3s ease;
+    }
+
     .footer{
       background:linear-gradient(to right,var(--cafe-oscuro),var(--cafe-medio));
       color:#fff;padding:1.5rem 1rem;margin-top:2.5rem;
@@ -453,14 +596,14 @@
 
     @media(max-width:768px){
       .logo{font-size:1.4rem}
-      .container{padding:1rem}
+      .container{padding:1rem; margin-left: 0;}
       .grid-productos{grid-template-columns:repeat(2, 1fr)}
       .carrito-flotante {
         width: calc(100% - 40px);
         max-height: 70vh;
         bottom: 90px;
       }
-      .btn-whatsapp-flotante {
+      .btn-carrito-flotante {
         min-width: 180px;
         padding: 0.9rem 1.2rem;
         font-size: 0.9rem;
@@ -469,7 +612,7 @@
     @media(max-width:480px){
       .grid-productos{grid-template-columns:1fr}
       .producto{padding:0.8rem}
-      .btn-whatsapp-flotante {
+      .btn-carrito-flotante {
         min-width: 150px;
         padding: 0.8rem 1rem;
         font-size: 0.85rem;
@@ -477,7 +620,7 @@
     }
 
     @media(min-width:1024px){
-      .whatsapp-flotante {
+      .carrito-boton-flotante {
         bottom: 30px;
         right: 30px;
       }
@@ -498,8 +641,24 @@
     <p class="subtitle">Menú Digital & Pedidos por WhatsApp</p>
   </header>
 
+  <!-- Menú de categorías lateral (escritorio) -->
+  <nav class="menu-categorias" id="menuCategorias">
+    <!-- Se generará dinámicamente -->
+  </nav>
+
+  <!-- Menú de categorías móvil -->
+  <div class="menu-categorias-movil" id="menuCategoriasMovil">
+    <!-- Se generará dinámicamente -->
+  </div>
+
+  <!-- Botón para mostrar categorías en móvil -->
+  <button class="btn-categorias-movil" id="btnCategoriasMovil">
+    <i class="fas fa-bars"></i>
+  </button>
+
   <main class="container">
-    <section class="productos" id="productos"></section>
+    <!-- Contenido de categorías se generará aquí -->
+    <div id="categoriasContenido"></div>
   </main>
 
   <!-- Overlay para cerrar carrito -->
@@ -591,15 +750,20 @@
           <span id="totalFlotante">$0</span>
         </div>
       </div>
+
+      <!-- BOTÓN WHATSAPP DENTRO DEL CARRITO -->
+      <button class="btn-whatsapp-carrito" id="btnWhatsappCarrito" disabled>
+        <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
+      </button>
     </div>
   </div>
 
-  <!-- Botón WhatsApp flotante -->
-  <div class="whatsapp-flotante">
-    <button class="btn-whatsapp-flotante" id="btnWhatsappFlotante" disabled>
-      <i class="fab fa-whatsapp"></i>
-      Pedir por WhatsApp
-      <span class="badge-carrito-flotante" id="badgeWhatsapp">0</span>
+  <!-- Botón Carrito flotante -->
+  <div class="carrito-boton-flotante">
+    <button class="btn-carrito-flotante" id="btnCarritoFlotante">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Ver Pedido</span>
+      <span class="badge-carrito-flotante" id="badgeCarritoBoton">0</span>
     </button>
   </div>
 
@@ -771,6 +935,8 @@
         this.totalItems = 0;
         this.storageKey = "carritoDeTodosCafe_prod";
         this.carritoAbierto = false;
+        this.categoriaActual = menuData.categorias[0].id; // Primera categoría por defecto
+        this.menuMovilAbierto = false;
 
         this.cacheDom();
         this.init();
@@ -781,14 +947,15 @@
         this.carritoFlotante = document.getElementById("carritoFlotante");
         this.overlayCarrito = document.getElementById("overlayCarrito");
         this.btnCerrarCarrito = document.getElementById("btnCerrarCarrito");
+        this.btnCarritoFlotante = document.getElementById("btnCarritoFlotante");
         this.itemsCarritoFlotante = document.getElementById("itemsCarritoFlotante");
         this.badgeCarritoFlotante = document.getElementById("badgeCarritoFlotante");
-        this.badgeWhatsapp = document.getElementById("badgeWhatsapp");
+        this.badgeCarritoBoton = document.getElementById("badgeCarritoBoton");
         this.subtotalFlotante = document.getElementById("subtotalFlotante");
         this.envioFlotante = document.getElementById("envioFlotante");
         this.empaqueFlotante = document.getElementById("empaqueFlotante");
         this.totalFlotante = document.getElementById("totalFlotante");
-        this.btnWhatsappFlotante = document.getElementById("btnWhatsappFlotante");
+        this.btnWhatsappCarrito = document.getElementById("btnWhatsappCarrito");
         
         // Opciones del carrito flotante
         this.selTipoFlotante = document.getElementById("tipoPedidoFlotante");
@@ -798,8 +965,11 @@
         this.filaDireccionFlotante = document.getElementById("filaDireccionFlotante");
         this.detallePagoFlotante = document.getElementById("detallePagoFlotante");
         
-        // Productos
-        this.elProductos = document.getElementById("productos");
+        // Menús
+        this.menuCategorias = document.getElementById("menuCategorias");
+        this.menuCategoriasMovil = document.getElementById("menuCategoriasMovil");
+        this.btnCategoriasMovil = document.getElementById("btnCategoriasMovil");
+        this.categoriasContenido = document.getElementById("categoriasContenido");
         
         // Footer
         this.footerDir = document.getElementById("localDireccionFooter");
@@ -809,35 +979,96 @@
         this.footerDir.textContent = CONFIG.localDireccion;
 
         this.loadFromStorage();
-        this.renderMenu();
+        this.renderMenus();
         this.attachEventListeners();
         this.updateUI();
 
         // Instrucciones solo una vez
         setTimeout(() => {
           if (!localStorage.getItem("instruccionesVistasDeTodosCafe")){
-            alert("💡 Cómo pedir:\n1) Agrega productos\n2) Toca el botón verde para ver tu pedido\n3) Completa los datos\n4) ¡Toca 'Pedir por WhatsApp'!\n\n¡Listo!");
+            alert("💡 Cómo pedir:\n1) Elige una categoría\n2) Agrega productos\n3) Toca 'Ver Pedido' para completar\n4) ¡Envía por WhatsApp!\n\n¡Listo!");
             localStorage.setItem("instruccionesVistasDeTodosCafe", "true");
           }
         }, 700);
       }
 
+      renderMenus(){
+        // Renderizar menú lateral (escritorio)
+        let menuHTML = '';
+        menuData.categorias.forEach(cat => {
+          menuHTML += `
+            <button class="categoria-btn ${this.categoriaActual === cat.id ? 'activa' : ''}" 
+                    data-categoria="${cat.id}">
+              <i class="fas fa-${cat.icono}"></i>
+              ${cat.nombre}
+            </button>
+          `;
+        });
+        this.menuCategorias.innerHTML = menuHTML;
+
+        // Renderizar menú móvil
+        this.menuCategoriasMovil.innerHTML = menuHTML;
+
+        // Renderizar contenido de categorías
+        this.renderCategoriasContenido();
+      }
+
+      renderCategoriasContenido(){
+        let contenidoHTML = '';
+        menuData.categorias.forEach(cat => {
+          const productosHTML = this.renderProductos(cat);
+          contenidoHTML += `
+            <div class="categoria-contenido ${this.categoriaActual === cat.id ? 'activa' : ''}" 
+                 id="categoria-${cat.id}">
+              <div class="grid-productos">
+                ${productosHTML}
+              </div>
+            </div>
+          `;
+        });
+        this.categoriasContenido.innerHTML = contenidoHTML;
+      }
+
+      renderProductos(cat){
+        return cat.productos.map(p => `
+          <div class="producto">
+            <div class="nombre-producto">${p.nombre}</div>
+            <div class="precio">${money(p.precio)}</div>
+            <button class="btn-agregar" data-id="${p.id}">
+              <i class="fas fa-cart-plus"></i> Agregar
+            </button>
+          </div>
+        `).join("");
+      }
+
       attachEventListeners(){
-        // Abrir carrito al hacer clic en el botón de WhatsApp
-        this.btnWhatsappFlotante.addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (this.totalItems === 0) {
-            // Si no hay items, mostrar el carrito vacío
-            this.abrirCarrito();
-          } else {
-            // Si hay items, verificar datos antes de enviar
-            this.validarYEnviarPedido();
-          }
+        // Botón para abrir el carrito flotante
+        this.btnCarritoFlotante.addEventListener("click", () => {
+          this.toggleCarrito();
         });
 
         // Cerrar carrito
         this.btnCerrarCarrito.addEventListener("click", () => this.cerrarCarrito());
         this.overlayCarrito.addEventListener("click", () => this.cerrarCarrito());
+
+        // Botón WhatsApp dentro del carrito
+        this.btnWhatsappCarrito.addEventListener("click", () => {
+          this.validarYEnviarPedido();
+        });
+
+        // Botón para mostrar categorías en móvil
+        this.btnCategoriasMovil.addEventListener("click", () => {
+          this.toggleMenuMovil();
+        });
+
+        // Cerrar menú móvil al hacer clic fuera
+        document.addEventListener('click', (e) => {
+          if (this.menuMovilAbierto && 
+              !this.menuCategoriasMovil.contains(e.target) && 
+              !this.btnCategoriasMovil.contains(e.target)) {
+            this.cerrarMenuMovil();
+          }
+        });
 
         // Tipo de pedido flotante
         this.selTipoFlotante.addEventListener("change", () => {
@@ -853,8 +1084,26 @@
         this.inpNombreFlotante.addEventListener("input", () => this.updateUI(false));
         this.inpDireccionFlotante.addEventListener("input", () => this.updateUI(false));
 
-        // Delegación: botones del menú (agregar)
-        this.elProductos.addEventListener("click", (e) => {
+        // Delegación: botones de categorías
+        this.menuCategorias.addEventListener("click", (e) => {
+          const btn = e.target.closest('.categoria-btn');
+          if (btn) {
+            const categoriaId = btn.dataset.categoria;
+            this.cambiarCategoria(categoriaId);
+          }
+        });
+
+        this.menuCategoriasMovil.addEventListener("click", (e) => {
+          const btn = e.target.closest('.categoria-btn');
+          if (btn) {
+            const categoriaId = btn.dataset.categoria;
+            this.cambiarCategoria(categoriaId);
+            this.cerrarMenuMovil();
+          }
+        });
+
+        // Delegación: botones de agregar productos
+        this.categoriasContenido.addEventListener("click", (e) => {
           const btn = e.target.closest("button");
           if (!btn) return;
           
@@ -885,6 +1134,47 @@
         this.applyPagoUI();
       }
 
+      cambiarCategoria(categoriaId){
+        // Actualizar botón activo en menús
+        document.querySelectorAll('.categoria-btn').forEach(btn => {
+          btn.classList.remove('activa');
+          if (btn.dataset.categoria === categoriaId) {
+            btn.classList.add('activa');
+          }
+        });
+
+        // Actualizar contenido visible
+        document.querySelectorAll('.categoria-contenido').forEach(contenido => {
+          contenido.classList.remove('activa');
+          if (contenido.id === `categoria-${categoriaId}`) {
+            contenido.classList.add('activa');
+          }
+        });
+
+        this.categoriaActual = categoriaId;
+        
+        // Hacer scroll suave hacia arriba
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      toggleMenuMovil(){
+        if (this.menuMovilAbierto) {
+          this.cerrarMenuMovil();
+        } else {
+          this.abrirMenuMovil();
+        }
+      }
+
+      abrirMenuMovil(){
+        this.menuCategoriasMovil.classList.add('abierto');
+        this.menuMovilAbierto = true;
+      }
+
+      cerrarMenuMovil(){
+        this.menuCategoriasMovil.classList.remove('abierto');
+        this.menuMovilAbierto = false;
+      }
+
       validarYEnviarPedido(){
         // Validación de nombre
         const nombre = normalizeSpaces(this.inpNombreFlotante.value);
@@ -909,6 +1199,9 @@
         const msg = this.buildWhatsAppMessage();
         const url = `https://wa.me/${CONFIG.telefonoWhatsApp}?text=${encodeURIComponent(msg)}`;
         window.open(url, "_blank");
+        
+        // Cerrar carrito después de enviar
+        setTimeout(() => this.cerrarCarrito(), 500);
       }
 
       applyTipoPedidoUI(){
@@ -949,36 +1242,6 @@
         } else {
           this.abrirCarrito();
         }
-      }
-
-      renderMenu(){
-        this.elProductos.innerHTML = "";
-        menuData.categorias.forEach(cat => {
-          const wrap = document.createElement("div");
-          wrap.className = "categoria";
-          wrap.innerHTML = `
-            <h2 class="titulo-categoria">
-              <i class="fas fa-${cat.icono}"></i>
-              ${cat.nombre}
-            </h2>
-            <div class="grid-productos">
-              ${this.renderProductos(cat)}
-            </div>
-          `;
-          this.elProductos.appendChild(wrap);
-        });
-      }
-
-      renderProductos(cat){
-        return cat.productos.map(p => `
-          <div class="producto">
-            <div class="nombre-producto">${p.nombre}</div>
-            <div class="precio">${money(p.precio)}</div>
-            <button class="btn-agregar" data-id="${p.id}">
-              <i class="fas fa-cart-plus"></i> Agregar
-            </button>
-          </div>
-        `).join("");
       }
 
       // ------- Carrito operations -------
@@ -1052,7 +1315,7 @@
 
         // Actualizar badges
         this.badgeCarritoFlotante.textContent = String(this.totalItems);
-        this.badgeWhatsapp.textContent = String(this.totalItems);
+        this.badgeCarritoBoton.textContent = String(this.totalItems);
         
         // Actualizar totales en carrito flotante
         this.subtotalFlotante.textContent = money(this.subtotal);
@@ -1061,7 +1324,7 @@
         this.totalFlotante.textContent = money(this.total);
 
         // Habilitar botón WhatsApp solo si hay items
-        this.btnWhatsappFlotante.disabled = (this.totalItems === 0);
+        this.btnWhatsappCarrito.disabled = (this.totalItems === 0);
 
         // Render carrito flotante
         if (reRenderCart) this.renderCart();
