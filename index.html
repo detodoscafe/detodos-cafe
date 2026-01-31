@@ -19,7 +19,7 @@
     :root{
       --cafe-oscuro:#3b1f0f; --cafe-medio:#8B4513; --cafe-claro:#D2691E;
       --whatsapp:#25D366; --texto:#2C1810; --acento:#FF6B35; --border:#E8D9C5;
-      --bg:#faf7f2;
+      --bg:#faf7f2; --rojo-temu:#ff3b30; --verde-temu:#34c759; --naranja-temu:#ff9500;
     }
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -146,36 +146,159 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ========== ESTILO TEMU PARA PRODUCTOS ========== */
     .grid-productos{
       display:grid; grid-template-columns:repeat(2, 1fr);
-      gap:0.8rem;
+      gap:1rem;
     }
     @media(min-width:768px){.grid-productos{grid-template-columns:repeat(3, 1fr)}}
     @media(min-width:1024px){.grid-productos{grid-template-columns:repeat(4, 1fr)}}
 
-    .producto{
-      background:var(--bg); border-radius:10px; padding:0.9rem;
-      border:1px solid var(--border); transition:all .25s ease;
+    .producto-temu{
+      background:#fff; border-radius:12px; padding:1rem;
+      border:1px solid #eaeaea; transition:all .25s ease;
       display:flex; flex-direction:column; height:100%;
+      position:relative; overflow:hidden;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
     }
-    .producto:hover{transform:translateY(-2px); box-shadow:0 5px 12px rgba(0,0,0,.08)}
-    .nombre-producto{
+    .producto-temu:hover{
+      transform:translateY(-3px); 
+      box-shadow:0 6px 16px rgba(0,0,0,0.1);
+      border-color:var(--cafe-claro);
+    }
+
+    /* Badge de stock al estilo Temu */
+    .badge-stock-temu {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: var(--rojo-temu);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 900;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      z-index: 2;
+    }
+
+    .badge-promo-temu {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--naranja-temu);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 900;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      z-index: 2;
+    }
+
+    .img-placeholder-temu {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .img-placeholder-temu i {
+      font-size: 2.5rem;
+      color: var(--cafe-medio);
+      opacity: 0.5;
+    }
+
+    .nombre-producto-temu{
       font-weight:800;font-size:0.95rem;margin-bottom:0.3rem;color:var(--cafe-oscuro);
       min-height:2.2rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+      line-height:1.3;
     }
-    .precio{font-weight:900;font-size:1.15rem;color:var(--acento);margin:0.5rem 0 0.7rem 0}
-    
-    .btn-agregar{
+
+    .descripcion-corta-temu {
+      font-size: 0.8rem;
+      color: #666;
+      margin-bottom: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.3;
+    }
+
+    .precio-temu{
+      font-weight:900;font-size:1.25rem;color:var(--rojo-temu);margin:0.5rem 0 0.3rem 0;
+    }
+
+    .precio-original-temu {
+      font-size: 0.85rem;
+      color: #999;
+      text-decoration: line-through;
+      margin-right: 0.3rem;
+    }
+
+    .envio-gratis-temu {
+      display: inline-block;
+      background: var(--verde-temu);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      margin-top: 0.2rem;
+    }
+
+    .rating-temu {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .rating-temu i {
+      color: #ffc107;
+      font-size: 0.8rem;
+    }
+
+    .rating-temu span {
+      font-size: 0.8rem;
+      color: #666;
+      margin-left: 0.3rem;
+    }
+
+    /* Botón de agregar al estilo Temu */
+    .btn-agregar-temu{
       width:100%;
-      background:linear-gradient(to right,var(--cafe-medio),var(--cafe-claro));
+      background:linear-gradient(to right,var(--rojo-temu),var(--naranja-temu));
       color:#fff;border:none;padding:0.7rem;border-radius:10px;
       font-weight:900;font-size:0.9rem;cursor:pointer;
       display:flex;align-items:center;justify-content:center;gap:.5rem;
       transition:all .25s; margin-top:auto;
+      position:relative;
+      overflow:hidden;
     }
-    .btn-agregar:hover{transform:translateY(-1px);box-shadow:0 4px 10px rgba(139,69,19,.25)}
+    .btn-agregar-temu:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(255,59,48,0.3);
+    }
 
-    /* BOTÓN CARRITO FLOTANTE - MEJORADO */
+    .btn-agregar-temu:active{
+      transform:translateY(0);
+    }
+
+    .btn-agregar-temu i {
+      transition: transform 0.2s;
+    }
+
+    .btn-agregar-temu:hover i {
+      transform: scale(1.2);
+    }
+
+    /* ========== CARRITO FLOTANTE AL ESTILO TEMU ========== */
+    /* BOTÓN CARRITO FLOTANTE - TEMU STYLE */
     .carrito-boton-flotante {
       position: fixed;
       bottom: 20px;
@@ -183,8 +306,8 @@
       z-index: 9999;
     }
 
-    .btn-carrito-flotante {
-      background: linear-gradient(to right, var(--cafe-medio), var(--cafe-claro));
+    .btn-carrito-flotante-temu {
+      background: linear-gradient(to right, var(--rojo-temu), var(--naranja-temu));
       color: #fff;
       border: none;
       padding: 1rem 1.5rem;
@@ -197,35 +320,35 @@
       justify-content: center;
       gap: 0.6rem;
       transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+      box-shadow: 0 6px 20px rgba(255, 59, 48, 0.3);
       min-width: 200px;
       position: relative;
     }
 
     @media(max-width:768px){
-      .btn-carrito-flotante {
+      .btn-carrito-flotante-temu {
         min-width: 60px;
         width: 60px;
         height: 60px;
         border-radius: 50%;
         padding: 0;
       }
-      .btn-carrito-flotante span {
+      .btn-carrito-flotante-temu span {
         display: none;
       }
     }
 
-    .btn-carrito-flotante:hover {
+    .btn-carrito-flotante-temu:hover {
       transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 59, 48, 0.4);
     }
 
-    .badge-carrito-flotante {
+    .badge-carrito-flotante-temu {
       position: absolute;
       top: -8px;
       right: -8px;
-      background: var(--acento);
-      color: #fff;
+      background: #fff;
+      color: var(--rojo-temu);
       width: 26px;
       height: 26px;
       border-radius: 50%;
@@ -234,12 +357,12 @@
       justify-content: center;
       font-size: 0.8rem;
       font-weight: 900;
-      border: 2px solid #fff;
+      border: 2px solid var(--rojo-temu);
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     @media(max-width:768px){
-      .badge-carrito-flotante {
+      .badge-carrito-flotante-temu {
         top: -5px;
         right: -5px;
         width: 22px;
@@ -248,13 +371,13 @@
       }
     }
 
-    /* CARRITO FLOTANTE */
-    .carrito-flotante {
+    /* CARRITO FLOTANTE TEMU */
+    .carrito-flotante-temu {
       position: fixed;
       bottom: 90px;
       right: 20px;
-      width: 350px;
-      max-height: 500px;
+      width: 380px;
+      max-height: 550px;
       background: #fff;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -262,10 +385,10 @@
       overflow: hidden;
       display: none;
       transition: all 0.3s ease;
-      border: 1px solid var(--border);
+      border: 1px solid #e0e0e0;
     }
 
-    .carrito-flotante.abierto {
+    .carrito-flotante-temu.abierto {
       display: flex;
       flex-direction: column;
       animation: slideUp 0.3s ease;
@@ -282,16 +405,16 @@
       }
     }
 
-    .cabecera-carrito-flotante {
-      background: linear-gradient(to right, var(--cafe-oscuro), var(--cafe-medio));
+    .cabecera-carrito-flotante-temu {
+      background: linear-gradient(to right, var(--rojo-temu), var(--naranja-temu));
       color: #fff;
-      padding: 1rem;
+      padding: 1rem 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .cabecera-carrito-flotante h3 {
+    .cabecera-carrito-flotante-temu h3 {
       font-family: 'Poppins', sans-serif;
       font-size: 1.2rem;
       margin: 0;
@@ -300,11 +423,11 @@
       gap: 0.5rem;
     }
 
-    .badge-carrito-cabecera {
-      background: var(--acento);
-      color: #fff;
-      width: 22px;
-      height: 22px;
+    .badge-carrito-cabecera-temu {
+      background: #fff;
+      color: var(--rojo-temu);
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
@@ -313,7 +436,7 @@
       font-weight: 900;
     }
 
-    .btn-cerrar-carrito {
+    .btn-cerrar-carrito-temu {
       background: transparent;
       border: 1px solid rgba(255,255,255,0.3);
       color: #fff;
@@ -324,188 +447,202 @@
       transition: all 0.25s;
     }
 
-    .btn-cerrar-carrito:hover {
+    .btn-cerrar-carrito-temu:hover {
       background: rgba(255,255,255,0.1);
     }
 
-    .contenido-carrito-flotante {
+    .contenido-carrito-flotante-temu {
       flex: 1;
       overflow-y: auto;
-      padding: 1rem;
+      padding: 1.2rem;
     }
 
-    .items-carrito-flotante {
-      max-height: 200px;
+    .items-carrito-flotante-temu {
+      max-height: 220px;
       overflow-y: auto;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
-    .item-carrito-flotante {
+    .item-carrito-flotante-temu {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       gap: 0.8rem;
-      padding: 0.7rem;
-      margin-bottom: 0.6rem;
-      background: var(--bg);
+      padding: 0.8rem;
+      margin-bottom: 0.8rem;
+      background: #f9f9f9;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      border: 1px solid #eaeaea;
     }
 
-    .info-item-flotante {
+    .info-item-flotante-temu {
       flex: 1;
     }
 
-    .nombre-item-flotante {
+    .nombre-item-flotante-temu {
       font-weight: 900;
       font-size: 0.9rem;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.3rem;
+      color: #333;
     }
 
-    .meta-item-flotante {
+    .precio-unitario-flotante-temu {
       font-size: 0.85rem;
-      color: #666;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
+      color: var(--rojo-temu);
+      font-weight: 900;
     }
 
-    .qty-row-flotante {
+    .qty-row-flotante-temu {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.3rem;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
     }
 
-    .btn-qty-flotante {
-      width: 26px;
-      height: 26px;
+    .btn-qty-flotante-temu {
+      width: 28px;
+      height: 28px;
       border-radius: 8px;
-      border: 1px solid var(--border);
+      border: 1px solid #ddd;
       background: #fff;
       cursor: pointer;
       font-weight: 900;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
     }
 
-    .btn-qty-flotante:hover {
-      border-color: var(--cafe-claro);
+    .btn-qty-flotante-temu:hover {
+      border-color: var(--rojo-temu);
+      background: #fff5f5;
     }
 
-    .qty-flotante {
-      min-width: 20px;
+    .qty-flotante-temu {
+      min-width: 24px;
       text-align: center;
       font-weight: 900;
-      color: var(--cafe-oscuro);
+      color: #333;
     }
 
-    .total-item-flotante {
+    .total-item-flotante-temu {
       font-weight: 900;
-      color: var(--acento);
-      font-size: 0.95rem;
+      color: var(--rojo-temu);
+      font-size: 1rem;
     }
 
-    .btn-x-flotante {
+    .btn-x-flotante-temu {
       background: transparent;
-      border: 1px solid var(--border);
+      border: 1px solid #ddd;
       border-radius: 10px;
-      padding: 0.2rem 0.5rem;
+      padding: 0.3rem 0.6rem;
       cursor: pointer;
       font-size: 0.8rem;
+      transition: all 0.2s;
     }
 
-    .btn-x-flotante:hover {
-      border-color: #fcc;
-      background: #fee;
-      color: #c00;
+    .btn-x-flotante-temu:hover {
+      border-color: var(--rojo-temu);
+      background: #fff5f5;
+      color: var(--rojo-temu);
     }
 
-    .total-pedido-flotante {
-      border-top: 2px solid var(--border);
-      padding-top: 0.9rem;
-      margin-bottom: 0.9rem;
+    .total-pedido-flotante-temu {
+      border-top: 2px solid #eee;
+      padding-top: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .fila-total-flotante {
+    .fila-total-flotante-temu {
       display: flex;
       justify-content: space-between;
       margin-bottom: 0.5rem;
       font-size: 0.95rem;
     }
 
-    .monto-total-flotante {
+    .monto-total-flotante-temu {
       font-weight: 900;
-      font-size: 1.25rem;
-      color: var(--cafe-oscuro);
+      font-size: 1.3rem;
+      color: var(--rojo-temu);
     }
 
-    .opciones-carrito-flotante {
-      border: 1px dashed var(--border);
+    .opciones-carrito-flotante-temu {
+      border: 1px dashed #ddd;
       border-radius: 12px;
-      padding: 0.9rem;
-      margin-bottom: 1rem;
-      background: #fffdfb;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      background: #fcfcfc;
     }
 
-    .titulo-bloque-flotante {
+    .titulo-bloque-flotante-temu {
       font-weight: 900;
       font-size: 0.95rem;
-      color: var(--cafe-oscuro);
+      color: #333;
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
     }
 
-    .fila-opciones-flotante {
+    .fila-opciones-flotante-temu {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
-      margin: 0.5rem 0 0.7rem 0;
+      gap: 0.4rem;
+      margin: 0.5rem 0 0.8rem 0;
     }
 
-    .label-mini-flotante {
+    .label-mini-flotante-temu {
       font-size: 0.8rem;
       color: #666;
       font-weight: 700;
     }
 
-    select.flotante, input.flotante {
+    select.flotante-temu, input.flotante-temu {
       width: 100%;
-      padding: 0.6rem 0.7rem;
-      border: 1px solid var(--border);
+      padding: 0.7rem 0.8rem;
+      border: 1px solid #ddd;
       border-radius: 10px;
       background: #fff;
       font-family: inherit;
       font-size: 0.9rem;
       outline: none;
+      transition: border 0.2s;
     }
 
-    .mini-ayuda-flotante {
+    select.flotante-temu:focus, input.flotante-temu:focus {
+      border-color: var(--rojo-temu);
+    }
+
+    .mini-ayuda-flotante-temu {
       font-size: 0.8rem;
       color: #666;
       margin-top: 0.3rem;
     }
 
-    .mensaje-vacio-flotante {
+    .mensaje-vacio-flotante-temu {
       text-align: center;
-      padding: 1.5rem;
+      padding: 2rem 1rem;
       color: #999;
     }
 
-    .mensaje-vacio-flotante i {
-      font-size: 2.5rem;
-      margin-bottom: 0.8rem;
+    .mensaje-vacio-flotante-temu i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
       opacity: 0.3;
     }
 
-    /* BOTÓN WHATSAPP DENTRO DEL CARRITO */
-    .btn-whatsapp-carrito {
+    .mensaje-vacio-flotante-temu p {
+      margin-bottom: 0.5rem;
+    }
+
+    /* BOTÓN WHATSAPP DENTRO DEL CARRITO TEMU */
+    .btn-whatsapp-carrito-temu {
       background: linear-gradient(to right, var(--whatsapp), #1da851);
       color: #fff;
       border: none;
       width: 100%;
-      padding: 0.9rem;
+      padding: 1rem;
       border-radius: 12px;
       font-size: 1rem;
       font-weight: 900;
@@ -519,12 +656,12 @@
       margin-top: 1rem;
     }
 
-    .btn-whatsapp-carrito:hover:not(:disabled) {
+    .btn-whatsapp-carrito-temu:hover:not(:disabled) {
       transform: translateY(-2px);
       box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
     }
 
-    .btn-whatsapp-carrito:disabled {
+    .btn-whatsapp-carrito-temu:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
@@ -532,7 +669,7 @@
     }
 
     /* Overlay para cerrar carrito */
-    .overlay-carrito {
+    .overlay-carrito-temu {
       position: fixed;
       top: 0;
       left: 0;
@@ -543,21 +680,21 @@
       display: none;
     }
 
-    .overlay-carrito.mostrar {
+    .overlay-carrito-temu.mostrar {
       display: block;
     }
 
-    .items-carrito-flotante::-webkit-scrollbar {
+    .items-carrito-flotante-temu::-webkit-scrollbar {
       width: 5px;
     }
 
-    .items-carrito-flotante::-webkit-scrollbar-track {
+    .items-carrito-flotante-temu::-webkit-scrollbar-track {
       background: #f1f1f1;
       border-radius: 3px;
     }
 
-    .items-carrito-flotante::-webkit-scrollbar-thumb {
-      background: var(--cafe-claro);
+    .items-carrito-flotante-temu::-webkit-scrollbar-thumb {
+      background: var(--rojo-temu);
       border-radius: 3px;
     }
 
@@ -598,12 +735,12 @@
       .logo{font-size:1.4rem}
       .container{padding:1rem; margin-left: 0;}
       .grid-productos{grid-template-columns:repeat(2, 1fr)}
-      .carrito-flotante {
+      .carrito-flotante-temu {
         width: calc(100% - 40px);
         max-height: 70vh;
         bottom: 90px;
       }
-      .btn-carrito-flotante {
+      .btn-carrito-flotante-temu {
         min-width: 180px;
         padding: 0.9rem 1.2rem;
         font-size: 0.9rem;
@@ -611,8 +748,8 @@
     }
     @media(max-width:480px){
       .grid-productos{grid-template-columns:1fr}
-      .producto{padding:0.8rem}
-      .btn-carrito-flotante {
+      .producto-temu{padding:0.8rem}
+      .btn-carrito-flotante-temu {
         min-width: 150px;
         padding: 0.8rem 1rem;
         font-size: 0.85rem;
@@ -624,7 +761,7 @@
         bottom: 30px;
         right: 30px;
       }
-      .carrito-flotante {
+      .carrito-flotante-temu {
         bottom: 100px;
         right: 30px;
       }
@@ -662,69 +799,69 @@
   </main>
 
   <!-- Overlay para cerrar carrito -->
-  <div class="overlay-carrito" id="overlayCarrito"></div>
+  <div class="overlay-carrito-temu" id="overlayCarritoTemu"></div>
 
-  <!-- Carrito flotante -->
-  <div class="carrito-flotante" id="carritoFlotante">
-    <div class="cabecera-carrito-flotante">
+  <!-- Carrito flotante estilo Temu -->
+  <div class="carrito-flotante-temu" id="carritoFlotanteTemu">
+    <div class="cabecera-carrito-flotante-temu">
       <h3>
         <i class="fas fa-shopping-cart"></i>
-        Tu Pedido
-        <span class="badge-carrito-cabecera" id="badgeCarritoFlotante">0</span>
+        Tu Carrito
+        <span class="badge-carrito-cabecera-temu" id="badgeCarritoFlotanteTemu">0</span>
       </h3>
-      <button class="btn-cerrar-carrito" id="btnCerrarCarrito">
+      <button class="btn-cerrar-carrito-temu" id="btnCerrarCarritoTemu">
         <i class="fas fa-times"></i> Cerrar
       </button>
     </div>
 
-    <div class="contenido-carrito-flotante">
-      <div class="opciones-carrito-flotante">
-        <div class="titulo-bloque-flotante">
+    <div class="contenido-carrito-flotante-temu">
+      <div class="opciones-carrito-flotante-temu">
+        <div class="titulo-bloque-flotante-temu">
           <i class="fas fa-sliders"></i> Datos del pedido
         </div>
 
-        <div class="fila-opciones-flotante">
-          <div class="label-mini-flotante">Tipo de pedido</div>
-          <select id="tipoPedidoFlotante" class="flotante">
+        <div class="fila-opciones-flotante-temu">
+          <div class="label-mini-flotante-temu">Tipo de pedido</div>
+          <select id="tipoPedidoFlotanteTemu" class="flotante-temu">
             <option value="domicilio">Domicilio</option>
             <option value="para_llevar">Para llevar</option>
             <option value="consumir_local">Consumir en el local</option>
           </select>
-          <div class="mini-ayuda-flotante" id="ayudaEmpaqueFlotante">
+          <div class="mini-ayuda-flotante-temu" id="ayudaEmpaqueFlotanteTemu">
             <i class="fas fa-info-circle"></i> Para llevar / Domicilio: se suma $1.000 por empaque.
           </div>
         </div>
 
-        <div class="fila-opciones-flotante" id="filaDireccionFlotante" style="display:block;">
-          <div class="label-mini-flotante">Dirección (solo si es domicilio)</div>
-          <input id="direccionEntregaFlotante" class="flotante" type="text" placeholder="Ej: Calle 12 #34-56, Barrio..." />
+        <div class="fila-opciones-flotante-temu" id="filaDireccionFlotanteTemu" style="display:block;">
+          <div class="label-mini-flotante-temu">Dirección (solo si es domicilio)</div>
+          <input id="direccionEntregaFlotanteTemu" class="flotante-temu" type="text" placeholder="Ej: Calle 12 #34-56, Barrio..." />
         </div>
 
-        <div class="fila-opciones-flotante">
-          <div class="label-mini-flotante">Forma de pago</div>
-          <select id="formaPagoFlotante" class="flotante">
+        <div class="fila-opciones-flotante-temu">
+          <div class="label-mini-flotante-temu">Forma de pago</div>
+          <select id="formaPagoFlotanteTemu" class="flotante-temu">
             <option value="nequi">Nequi</option>
             <option value="efectivo">Efectivo</option>
           </select>
-          <div class="mini-ayuda-flotante" id="detallePagoFlotante">
+          <div class="mini-ayuda-flotante-temu" id="detallePagoFlotanteTemu">
             <i class="fas fa-money-bill-wave"></i>
             Nequi: 3222096301 — Vigny Valencia
           </div>
         </div>
 
-        <div class="fila-opciones-flotante">
-          <div class="label-mini-flotante">Nombre de quien recoge</div>
-          <input id="nombreClienteFlotante" class="flotante" type="text" placeholder="Ej: Juan Pérez" />
+        <div class="fila-opciones-flotante-temu">
+          <div class="label-mini-flotante-temu">Nombre de quien recoge</div>
+          <input id="nombreClienteFlotanteTemu" class="flotante-temu" type="text" placeholder="Ej: Juan Pérez" />
         </div>
 
-        <div class="mini-ayuda-flotante">
+        <div class="mini-ayuda-flotante-temu">
           <i class="fas fa-clock"></i> Tiempo estimado: <b>30 minutos</b>.
         </div>
       </div>
 
       <!-- ITEMS -->
-      <div class="items-carrito-flotante" id="itemsCarritoFlotante">
-        <div class="mensaje-vacio-flotante">
+      <div class="items-carrito-flotante-temu" id="itemsCarritoFlotanteTemu">
+        <div class="mensaje-vacio-flotante-temu">
           <i class="fas fa-shopping-cart"></i>
           <p>Tu carrito está vacío</p>
           <p>Agrega productos para comenzar</p>
@@ -732,38 +869,38 @@
       </div>
 
       <!-- TOTALES -->
-      <div class="total-pedido-flotante">
-        <div class="fila-total-flotante">
+      <div class="total-pedido-flotante-temu">
+        <div class="fila-total-flotante-temu">
           <span>Subtotal:</span>
-          <span id="subtotalFlotante">$0</span>
+          <span id="subtotalFlotanteTemu">$0</span>
         </div>
-        <div class="fila-total-flotante">
+        <div class="fila-total-flotante-temu">
           <span>Envío:</span>
-          <span id="envioFlotante">$0</span>
+          <span id="envioFlotanteTemu">$0</span>
         </div>
-        <div class="fila-total-flotante">
+        <div class="fila-total-flotante-temu">
           <span>Empaque:</span>
-          <span id="empaqueFlotante">$0</span>
+          <span id="empaqueFlotanteTemu">$0</span>
         </div>
-        <div class="fila-total-flotante monto-total-flotante">
+        <div class="fila-total-flotante-temu monto-total-flotante-temu">
           <span>Total:</span>
-          <span id="totalFlotante">$0</span>
+          <span id="totalFlotanteTemu">$0</span>
         </div>
       </div>
 
       <!-- BOTÓN WHATSAPP DENTRO DEL CARRITO -->
-      <button class="btn-whatsapp-carrito" id="btnWhatsappCarrito" disabled>
+      <button class="btn-whatsapp-carrito-temu" id="btnWhatsappCarritoTemu" disabled>
         <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
       </button>
     </div>
   </div>
 
-  <!-- Botón Carrito flotante -->
+  <!-- Botón Carrito flotante estilo Temu -->
   <div class="carrito-boton-flotante">
-    <button class="btn-carrito-flotante" id="btnCarritoFlotante">
+    <button class="btn-carrito-flotante-temu" id="btnCarritoFlotanteTemu">
       <i class="fas fa-shopping-cart"></i>
-      <span>Ver Pedido</span>
-      <span class="badge-carrito-flotante" id="badgeCarritoBoton">0</span>
+      <span>Ver Carrito</span>
+      <span class="badge-carrito-flotante-temu" id="badgeCarritoBotonTemu">0</span>
     </button>
   </div>
 
@@ -802,34 +939,34 @@
           nombre: "Limonadas Granizadas",
           icono: "glass-whiskey",
           productos: [
-            { id: 1, nombre: "Mango sal pimienta", precio: 10000 },
-            { id: 2, nombre: "Mango + hierbabuena", precio: 11000 },
-            { id: 3, nombre: "Mango + piña", precio: 11000 },
-            { id: 4, nombre: "Mango + maracuyá", precio: 11000 },
-            { id: 5, nombre: "Mango + lulo", precio: 12000 },
-            { id: 6, nombre: "Mango + mandarina", precio: 12000 },
-            { id: 7, nombre: "Mango + naranja", precio: 12000 },
-            { id: 8, nombre: "Mango + mandarina + manzana", precio: 13000 },
-            { id: 9, nombre: "Mango + piña + maracuyá", precio: 13000 },
-            { id: 10, nombre: "Maracuyá", precio: 10000 },
-            { id: 11, nombre: "Maracuyá + hierbabuena", precio: 11000 },
-            { id: 12, nombre: "Lulo", precio: 11000 },
-            { id: 13, nombre: "Lulo + hierbabuena", precio: 12000 },
-            { id: 14, nombre: "Cereza", precio: 11000 },
-            { id: 15, nombre: "Cereza + hierbabuena", precio: 12000 },
-            { id: 16, nombre: "Fresa + limón", precio: 11000 },
-            { id: 17, nombre: "Limón + hierbabuena", precio: 7000 },
-            { id: 18, nombre: "Manzana", precio: 10000 },
-            { id: 19, nombre: "Manzana + hierbabuena", precio: 11000 },
-            { id: 20, nombre: "Piña", precio: 10000 },
-            { id: 21, nombre: "Piña + hierbabuena", precio: 11000 },
-            { id: 22, nombre: "Mora + fresas", precio: 12000 },
-            { id: 23, nombre: "Mora", precio: 10000 },
-            { id: 24, nombre: "Uva", precio: 10000 },
-            { id: 25, nombre: "Naranja", precio: 10000 },
-            { id: 26, nombre: "Naranja + hierbabuena", precio: 11000 },
-            { id: 27, nombre: "Mandarina", precio: 11000 },
-            { id: 28, nombre: "Coco", precio: 13000 }
+            { id: 1, nombre: "Mango sal pimienta", precio: 10000, descripcion: "Refrescante limonada de mango con toque de sal y pimienta", stock: 6, rating: 4.5, ventas: 120 },
+            { id: 2, nombre: "Mango + hierbabuena", precio: 11000, descripcion: "Combinación perfecta de mango con hierbabuena fresca", stock: 8, rating: 4.7, ventas: 95 },
+            { id: 3, nombre: "Mango + piña", precio: 11000, descripcion: "Dulzura tropical de mango y piña", stock: 5, rating: 4.4, ventas: 87 },
+            { id: 4, nombre: "Mango + maracuyá", precio: 11000, descripcion: "Mezcla exótica de mango y maracuyá", stock: 7, rating: 4.8, ventas: 110 },
+            { id: 5, nombre: "Mango + lulo", precio: 12000, descripcion: "Sabor único de mango con lulo", stock: 4, rating: 4.6, ventas: 76 },
+            { id: 6, nombre: "Mango + mandarina", precio: 12000, descripcion: "Fusión cítrica de mango y mandarina", stock: 9, rating: 4.3, ventas: 82 },
+            { id: 7, nombre: "Mango + naranja", precio: 12000, descripcion: "Clásico tropical de mango y naranja", stock: 6, rating: 4.5, ventas: 93 },
+            { id: 8, nombre: "Mango + mandarina + manzana", precio: 13000, descripcion: "Tres frutas en una sola bebida", stock: 3, rating: 4.9, ventas: 65 },
+            { id: 9, nombre: "Mango + piña + maracuyá", precio: 13000, descripcion: "Explosión tropical triple", stock: 5, rating: 4.7, ventas: 88 },
+            { id: 10, nombre: "Maracuyá", precio: 10000, descripcion: "Limonada pura de maracuyá", stock: 10, rating: 4.4, ventas: 102 },
+            { id: 11, nombre: "Maracuyá + hierbabuena", precio: 11000, descripcion: "Maracuyá con toque de hierbabuena", stock: 7, rating: 4.6, ventas: 79 },
+            { id: 12, nombre: "Lulo", precio: 11000, descripcion: "Auténtico sabor a lulo colombiano", stock: 6, rating: 4.8, ventas: 121 },
+            { id: 13, nombre: "Lulo + hierbabuena", precio: 12000, descripcion: "Lulo refrescante con hierbabuena", stock: 4, rating: 4.5, ventas: 67 },
+            { id: 14, nombre: "Cereza", precio: 11000, descripcion: "Dulce y ácida limonada de cereza", stock: 8, rating: 4.3, ventas: 54 },
+            { id: 15, nombre: "Cereza + hierbabuena", precio: 12000, descripcion: "Cereza con frescura de hierbabuena", stock: 5, rating: 4.4, ventas: 49 },
+            { id: 16, nombre: "Fresa + limón", precio: 11000, descripcion: "Clásico de fresa con limón", stock: 9, rating: 4.6, ventas: 112 },
+            { id: 17, nombre: "Limón + hierbabuena", precio: 7000, descripcion: "Refrescante limón con hierbabuena", stock: 15, rating: 4.2, ventas: 145 },
+            { id: 18, nombre: "Manzana", precio: 10000, descripcion: "Limonada suave de manzana", stock: 7, rating: 4.1, ventas: 58 },
+            { id: 19, nombre: "Manzana + hierbabuena", precio: 11000, descripcion: "Manzana verde con hierbabuena", stock: 6, rating: 4.3, ventas: 47 },
+            { id: 20, nombre: "Piña", precio: 10000, descripcion: "Dulce y tropical limonada de piña", stock: 8, rating: 4.5, ventas: 89 },
+            { id: 21, nombre: "Piña + hierbabuena", precio: 11000, descripcion: "Piña con frescura de hierbabuena", stock: 5, rating: 4.4, ventas: 72 },
+            { id: 22, nombre: "Mora + fresas", precio: 12000, descripcion: "Mezcla de mora y fresa silvestre", stock: 4, rating: 4.7, ventas: 63 },
+            { id: 23, nombre: "Mora", precio: 10000, descripcion: "Intenso sabor a mora", stock: 6, rating: 4.6, ventas: 84 },
+            { id: 24, nombre: "Uva", precio: 10000, descripcion: "Limonada dulce de uva", stock: 7, rating: 4.3, ventas: 59 },
+            { id: 25, nombre: "Naranja", precio: 10000, descripcion: "Clásica limonada de naranja", stock: 10, rating: 4.2, ventas: 97 },
+            { id: 26, nombre: "Naranja + hierbabuena", precio: 11000, descripcion: "Naranja con toque de hierbabuena", stock: 8, rating: 4.4, ventas: 76 },
+            { id: 27, nombre: "Mandarina", precio: 11000, descripcion: "Limonada cítrica de mandarina", stock: 6, rating: 4.5, ventas: 68 },
+            { id: 28, nombre: "Coco", precio: 13000, descripcion: "Exótica limonada de coco tropical", stock: 3, rating: 4.8, ventas: 41 }
           ]
         },
         {
@@ -837,13 +974,13 @@
           nombre: "Sodas",
           icono: "glass-cheers",
           productos: [
-            { id: 29, nombre: "Limón + sal", precio: 6000 },
-            { id: 30, nombre: "Soda michelada de Mango", precio: 11000 },
-            { id: 31, nombre: "Frutos amarillos", precio: 11000 },
-            { id: 32, nombre: "Frutos rojos", precio: 11000 },
-            { id: 33, nombre: "Cereza hierbabuena", precio: 11000 },
-            { id: 34, nombre: "Manzana verde", precio: 11000 },
-            { id: 35, nombre: "Michelada de ginger", precio: 11000 }
+            { id: 29, nombre: "Limón + sal", precio: 6000, descripcion: "Soda refrescante de limón con sal", stock: 12, rating: 4.0, ventas: 134 },
+            { id: 30, nombre: "Soda michelada de Mango", precio: 11000, descripcion: "Michelada tropical de mango", stock: 5, rating: 4.7, ventas: 88 },
+            { id: 31, nombre: "Frutos amarillos", precio: 11000, descripcion: "Mezcla de frutas amarillas", stock: 6, rating: 4.4, ventas: 72 },
+            { id: 32, nombre: "Frutos rojos", precio: 11000, descripcion: "Combinación de frutos rojos", stock: 7, rating: 4.6, ventas: 81 },
+            { id: 33, nombre: "Cereza hierbabuena", precio: 11000, descripcion: "Soda de cereza con hierbabuena", stock: 4, rating: 4.3, ventas: 57 },
+            { id: 34, nombre: "Manzana verde", precio: 11000, descripcion: "Refrescante soda de manzana verde", stock: 8, rating: 4.2, ventas: 63 },
+            { id: 35, nombre: "Michelada de ginger", precio: 11000, descripcion: "Michelada con jengibre", stock: 5, rating: 4.8, ventas: 79 }
           ]
         },
         {
@@ -851,15 +988,15 @@
           nombre: "Granizados",
           icono: "snowflake",
           productos: [
-            { id: 36, nombre: "Milo", precio: 10000 },
-            { id: 37, nombre: "Milo nevado", precio: 11000 },
-            { id: 38, nombre: "Oreo", precio: 11000 },
-            { id: 39, nombre: "Oreo nevado", precio: 12000 },
-            { id: 40, nombre: "Café", precio: 10000 },
-            { id: 41, nombre: "Café nevado", precio: 11000 },
-            { id: 42, nombre: "Frapuchino", precio: 12000 },
-            { id: 43, nombre: "Frapuchino nevado", precio: 13000 },
-            { id: 44, nombre: "Frapuchino whisky", precio: 14000 }
+            { id: 36, nombre: "Milo", precio: 10000, descripcion: "Granizado clásico de Milo", stock: 9, rating: 4.7, ventas: 156 },
+            { id: 37, nombre: "Milo nevado", precio: 11000, descripcion: "Milo con crema y toppings", stock: 7, rating: 4.8, ventas: 142 },
+            { id: 38, nombre: "Oreo", precio: 11000, descripcion: "Granizado de galleta Oreo", stock: 6, rating: 4.9, ventas: 167 },
+            { id: 39, nombre: "Oreo nevado", precio: 12000, descripcion: "Oreo con crema y trozos de galleta", stock: 4, rating: 4.9, ventas: 133 },
+            { id: 40, nombre: "Café", precio: 10000, descripcion: "Granizado de café colombiano", stock: 8, rating: 4.6, ventas: 121 },
+            { id: 41, nombre: "Café nevado", precio: 11000, descripcion: "Café con crema y sirope", stock: 5, rating: 4.7, ventas: 98 },
+            { id: 42, nombre: "Frapuchino", precio: 12000, descripcion: "Mezcla de café y chocolate", stock: 6, rating: 4.8, ventas: 114 },
+            { id: 43, nombre: "Frapuchino nevado", precio: 13000, descripcion: "Frapuchino con crema y toppings", stock: 3, rating: 4.9, ventas: 89 },
+            { id: 44, nombre: "Frapuchino whisky", precio: 14000, descripcion: "Frapuchino con toque de whisky", stock: 2, rating: 4.7, ventas: 45 }
           ]
         },
         {
@@ -867,11 +1004,11 @@
           nombre: "Cremosos",
           icono: "ice-cream",
           productos: [
-            { id: 45, nombre: "Cremoso maracuyá", precio: 11000 },
-            { id: 46, nombre: "Cremoso mora", precio: 11000 },
-            { id: 47, nombre: "Cremoso uva", precio: 11000 },
-            { id: 48, nombre: "Cremoso fresa", precio: 11000 },
-            { id: 49, nombre: "Cremoso frutos rojos", precio: 12000 }
+            { id: 45, nombre: "Cremoso maracuyá", precio: 11000, descripcion: "Bebida cremosa de maracuyá", stock: 7, rating: 4.5, ventas: 78 },
+            { id: 46, nombre: "Cremoso mora", precio: 11000, descripcion: "Cremoso de mora silvestre", stock: 5, rating: 4.6, ventas: 69 },
+            { id: 47, nombre: "Cremoso uva", precio: 11000, descripcion: "Suave y cremoso de uva", stock: 6, rating: 4.4, ventas: 57 },
+            { id: 48, nombre: "Cremoso fresa", precio: 11000, descripcion: "Cremoso clásico de fresa", stock: 8, rating: 4.7, ventas: 92 },
+            { id: 49, nombre: "Cremoso frutos rojos", precio: 12000, descripcion: "Mezcla cremosa de frutos rojos", stock: 4, rating: 4.8, ventas: 61 }
           ]
         },
         {
@@ -879,19 +1016,19 @@
           nombre: "Bebidas calientes",
           icono: "mug-hot",
           productos: [
-            { id: 50, nombre: "Café de la casa", precio: 1500 },
-            { id: 51, nombre: "Americano", precio: 3000 },
-            { id: 52, nombre: "Café en prensa", precio: 6000 },
-            { id: 53, nombre: "Expreso", precio: 3000 },
-            { id: 54, nombre: "Carajillo", precio: 5000 },
-            { id: 55, nombre: "Perico", precio: 1500 },
-            { id: 56, nombre: "Café con leche", precio: 2000 },
-            { id: 57, nombre: "Espumoso", precio: 7000 },
-            { id: 58, nombre: "Café bombón", precio: 7000 },
-            { id: 59, nombre: "Capuchino whisky", precio: 7000 },
-            { id: 60, nombre: "Capuchino oreo", precio: 7000 },
-            { id: 61, nombre: "Capuchino masmelo", precio: 7000 },
-            { id: 62, nombre: "Milo caliente", precio: 6000 }
+            { id: 50, nombre: "Café de la casa", precio: 1500, descripcion: "Café colombiano tradicional", stock: 20, rating: 4.3, ventas: 245 },
+            { id: 51, nombre: "Americano", precio: 3000, descripcion: "Café americano fuerte", stock: 15, rating: 4.4, ventas: 187 },
+            { id: 52, nombre: "Café en prensa", precio: 6000, descripcion: "Café preparado en prensa francesa", stock: 8, rating: 4.7, ventas: 112 },
+            { id: 53, nombre: "Expreso", precio: 3000, descripcion: "Café expreso intenso", stock: 12, rating: 4.5, ventas: 156 },
+            { id: 54, nombre: "Carajillo", precio: 5000, descripcion: "Café con aguardiente", stock: 6, rating: 4.8, ventas: 93 },
+            { id: 55, nombre: "Perico", precio: 1500, descripcion: "Café con leche colombiano", stock: 18, rating: 4.2, ventas: 201 },
+            { id: 56, nombre: "Café con leche", precio: 2000, descripcion: "Café con leche caliente", stock: 16, rating: 4.3, ventas: 178 },
+            { id: 57, nombre: "Espumoso", precio: 7000, descripcion: "Café con espuma de leche", stock: 7, rating: 4.6, ventas: 89 },
+            { id: 58, nombre: "Café bombón", precio: 7000, descripcion: "Café con leche condensada", stock: 9, rating: 4.7, ventas: 104 },
+            { id: 59, nombre: "Capuchino whisky", precio: 7000, descripcion: "Capuchino con toque de whisky", stock: 5, rating: 4.8, ventas: 76 },
+            { id: 60, nombre: "Capuchino oreo", precio: 7000, descripcion: "Capuchino con galleta Oreo", stock: 4, rating: 4.9, ventas: 121 },
+            { id: 61, nombre: "Capuchino masmelo", precio: 7000, descripcion: "Capuchino con malvaviscos", stock: 6, rating: 4.7, ventas: 88 },
+            { id: 62, nombre: "Milo caliente", precio: 6000, descripcion: "Bebida caliente de Milo", stock: 10, rating: 4.5, ventas: 134 }
           ]
         },
         {
@@ -899,11 +1036,11 @@
           nombre: "Infusiones y aromáticas",
           icono: "leaf",
           productos: [
-            { id: 63, nombre: "Aromática de panela", precio: 2000 },
-            { id: 64, nombre: "Infusión de hierbabuena", precio: 1500 },
-            { id: 65, nombre: "Infusión de flor de Jamaica", precio: 2000 },
-            { id: 66, nombre: "Aromática de frutos rojos", precio: 5000 },
-            { id: 67, nombre: "Aromática de frutas amarilla", precio: 5000 }
+            { id: 63, nombre: "Aromática de panela", precio: 2000, descripcion: "Agua de panela con limón", stock: 15, rating: 4.1, ventas: 167 },
+            { id: 64, nombre: "Infusión de hierbabuena", precio: 1500, descripcion: "Té de hierbabuena natural", stock: 12, rating: 4.3, ventas: 98 },
+            { id: 65, nombre: "Infusión de flor de Jamaica", precio: 2000, descripcion: "Té rojo de flor de Jamaica", stock: 8, rating: 4.4, ventas: 76 },
+            { id: 66, nombre: "Aromática de frutos rojos", precio: 5000, descripcion: "Infusión de frutos rojos", stock: 6, rating: 4.6, ventas: 57 },
+            { id: 67, nombre: "Aromática de frutas amarilla", precio: 5000, descripcion: "Infusión de frutas amarillas", stock: 5, rating: 4.5, ventas: 49 }
           ]
         },
         {
@@ -911,10 +1048,10 @@
           nombre: "Combos especiales",
           icono: "gift",
           productos: [
-            { id: 68, nombre: "Agua panela + pan + roscas + queso", precio: 10000 },
-            { id: 69, nombre: "Milo + pan + roscas + queso", precio: 11000 },
-            { id: 70, nombre: "Migao de chocolate", precio: 11000 },
-            { id: 71, nombre: "Migao de milo", precio: 12000 }
+            { id: 68, nombre: "Agua panela + pan + roscas + queso", precio: 10000, descripcion: "Combo completo para compartir", stock: 6, rating: 4.8, ventas: 89 },
+            { id: 69, nombre: "Milo + pan + roscas + queso", precio: 11000, descripcion: "Combo dulce con Milo", stock: 4, rating: 4.7, ventas: 72 },
+            { id: 70, nombre: "Migao de chocolate", precio: 11000, descripcion: "Migao tradicional de chocolate", stock: 5, rating: 4.9, ventas: 94 },
+            { id: 71, nombre: "Migao de milo", precio: 12000, descripcion: "Migao especial de Milo", stock: 3, rating: 4.8, ventas: 61 }
           ]
         }
       ]
@@ -923,9 +1060,27 @@
     // ==================== UTILIDADES ====================
     const money = (n) => `$${Number(n || 0).toLocaleString("es-CO")}`;
     const normalizeSpaces = (s) => (s || "").replace(/\s+/g, " ").trim();
+    
+    // Función para generar estrellas de rating
+    const renderStars = (rating) => {
+      let stars = '';
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      
+      for (let i = 1; i <= 5; i++) {
+        if (i <= fullStars) {
+          stars += '<i class="fas fa-star"></i>';
+        } else if (i === fullStars + 1 && hasHalfStar) {
+          stars += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
+      }
+      return stars;
+    };
 
-    // ==================== CARRITO FLOTANTE ====================
-    class CarritoFlotante {
+    // ==================== CARRITO FLOTANTE TEMU ====================
+    class CarritoFlotanteTemu {
       constructor(){
         this.items = new Map();
         this.subtotal = 0;
@@ -933,9 +1088,9 @@
         this.empaque = 0;
         this.total = 0;
         this.totalItems = 0;
-        this.storageKey = "carritoDeTodosCafe_prod";
+        this.storageKey = "carritoDeTodosCafe_temu_prod";
         this.carritoAbierto = false;
-        this.categoriaActual = menuData.categorias[0].id; // Primera categoría por defecto
+        this.categoriaActual = menuData.categorias[0].id;
         this.menuMovilAbierto = false;
 
         this.cacheDom();
@@ -943,27 +1098,27 @@
       }
 
       cacheDom(){
-        // Elementos del carrito flotante
-        this.carritoFlotante = document.getElementById("carritoFlotante");
-        this.overlayCarrito = document.getElementById("overlayCarrito");
-        this.btnCerrarCarrito = document.getElementById("btnCerrarCarrito");
-        this.btnCarritoFlotante = document.getElementById("btnCarritoFlotante");
-        this.itemsCarritoFlotante = document.getElementById("itemsCarritoFlotante");
-        this.badgeCarritoFlotante = document.getElementById("badgeCarritoFlotante");
-        this.badgeCarritoBoton = document.getElementById("badgeCarritoBoton");
-        this.subtotalFlotante = document.getElementById("subtotalFlotante");
-        this.envioFlotante = document.getElementById("envioFlotante");
-        this.empaqueFlotante = document.getElementById("empaqueFlotante");
-        this.totalFlotante = document.getElementById("totalFlotante");
-        this.btnWhatsappCarrito = document.getElementById("btnWhatsappCarrito");
+        // Elementos del carrito flotante Temu
+        this.carritoFlotante = document.getElementById("carritoFlotanteTemu");
+        this.overlayCarrito = document.getElementById("overlayCarritoTemu");
+        this.btnCerrarCarrito = document.getElementById("btnCerrarCarritoTemu");
+        this.btnCarritoFlotante = document.getElementById("btnCarritoFlotanteTemu");
+        this.itemsCarritoFlotante = document.getElementById("itemsCarritoFlotanteTemu");
+        this.badgeCarritoFlotante = document.getElementById("badgeCarritoFlotanteTemu");
+        this.badgeCarritoBoton = document.getElementById("badgeCarritoBotonTemu");
+        this.subtotalFlotante = document.getElementById("subtotalFlotanteTemu");
+        this.envioFlotante = document.getElementById("envioFlotanteTemu");
+        this.empaqueFlotante = document.getElementById("empaqueFlotanteTemu");
+        this.totalFlotante = document.getElementById("totalFlotanteTemu");
+        this.btnWhatsappCarrito = document.getElementById("btnWhatsappCarritoTemu");
         
         // Opciones del carrito flotante
-        this.selTipoFlotante = document.getElementById("tipoPedidoFlotante");
-        this.selPagoFlotante = document.getElementById("formaPagoFlotante");
-        this.inpNombreFlotante = document.getElementById("nombreClienteFlotante");
-        this.inpDireccionFlotante = document.getElementById("direccionEntregaFlotante");
-        this.filaDireccionFlotante = document.getElementById("filaDireccionFlotante");
-        this.detallePagoFlotante = document.getElementById("detallePagoFlotante");
+        this.selTipoFlotante = document.getElementById("tipoPedidoFlotanteTemu");
+        this.selPagoFlotante = document.getElementById("formaPagoFlotanteTemu");
+        this.inpNombreFlotante = document.getElementById("nombreClienteFlotanteTemu");
+        this.inpDireccionFlotante = document.getElementById("direccionEntregaFlotanteTemu");
+        this.filaDireccionFlotante = document.getElementById("filaDireccionFlotanteTemu");
+        this.detallePagoFlotante = document.getElementById("detallePagoFlotanteTemu");
         
         // Menús
         this.menuCategorias = document.getElementById("menuCategorias");
@@ -985,9 +1140,9 @@
 
         // Instrucciones solo una vez
         setTimeout(() => {
-          if (!localStorage.getItem("instruccionesVistasDeTodosCafe")){
-            alert("💡 Cómo pedir:\n1) Elige una categoría\n2) Agrega productos\n3) Toca 'Ver Pedido' para completar\n4) ¡Envía por WhatsApp!\n\n¡Listo!");
-            localStorage.setItem("instruccionesVistasDeTodosCafe", "true");
+          if (!localStorage.getItem("instruccionesVistasDeTodosCafeTemu")){
+            alert("🛒 ¡Bienvenido a De Todos Café con estilo Temu!\n\n1) Explora categorías\n2) Agrega productos con 'Agregar'\n3) Toca 'Ver Carrito' para completar tu pedido\n4) ¡Envía por WhatsApp!\n\n¡Disfruta de tu experiencia de compra!");
+            localStorage.setItem("instruccionesVistasDeTodosCafeTemu", "true");
           }
         }, 700);
       }
@@ -1030,15 +1185,51 @@
       }
 
       renderProductos(cat){
-        return cat.productos.map(p => `
-          <div class="producto">
-            <div class="nombre-producto">${p.nombre}</div>
-            <div class="precio">${money(p.precio)}</div>
-            <button class="btn-agregar" data-id="${p.id}">
-              <i class="fas fa-cart-plus"></i> Agregar
-            </button>
-          </div>
-        `).join("");
+        return cat.productos.map(p => {
+          // Determinar si mostrar badge de stock bajo
+          const stockBadge = p.stock <= 5 ? `<div class="badge-stock-temu">SOLO QUEDAN ${p.stock}</div>` : '';
+          
+          // Determinar si mostrar badge de promoción (ej: cada 5 productos)
+          const promoBadge = p.id % 5 === 0 ? `<div class="badge-promo-temu">PROMOCIÓN</div>` : '';
+          
+          // Calcular precio original (para mostrar descuento visual)
+          const precioOriginal = p.id % 3 === 0 ? Math.round(p.precio * 1.2) : null;
+          
+          // Mostrar envío gratis para productos sobre cierto precio
+          const envioGratis = p.precio >= 12000 ? '<div class="envio-gratis-temu">ENVÍO GRATIS</div>' : '';
+          
+          // Icono según categoría
+          const iconoCategoria = cat.icono === 'glass-whiskey' ? 'fa-glass-whiskey' :
+                                cat.icono === 'glass-cheers' ? 'fa-glass-cheers' :
+                                cat.icono === 'snowflake' ? 'fa-snowflake' :
+                                cat.icono === 'ice-cream' ? 'fa-ice-cream' :
+                                cat.icono === 'mug-hot' ? 'fa-mug-hot' :
+                                cat.icono === 'leaf' ? 'fa-leaf' : 'fa-gift';
+          
+          return `
+            <div class="producto-temu">
+              ${stockBadge}
+              ${promoBadge}
+              <div class="img-placeholder-temu">
+                <i class="fas ${iconoCategoria}"></i>
+              </div>
+              <div class="nombre-producto-temu">${p.nombre}</div>
+              <div class="descripcion-corta-temu">${p.descripcion}</div>
+              <div class="rating-temu">
+                ${renderStars(p.rating)}
+                <span>(${p.ventas})</span>
+              </div>
+              <div class="precio-temu">
+                ${precioOriginal ? `<span class="precio-original-temu">${money(precioOriginal)}</span>` : ''}
+                ${money(p.precio)}
+              </div>
+              ${envioGratis}
+              <button class="btn-agregar-temu" data-id="${p.id}">
+                <i class="fas fa-cart-plus"></i> Agregar
+              </button>
+            </div>
+          `;
+        }).join("");
       }
 
       attachEventListeners(){
@@ -1107,11 +1298,20 @@
           const btn = e.target.closest("button");
           if (!btn) return;
           
-          if (btn.classList.contains('btn-agregar')) {
+          if (btn.classList.contains('btn-agregar-temu')) {
             const id = Number(btn.dataset.id);
             const prod = this.findProductById(id);
             if (!prod) return;
             this.addItem(prod.id, prod.nombre, prod.precio, 1);
+            
+            // Efecto visual de añadir al carrito
+            btn.innerHTML = '<i class="fas fa-check"></i> Añadido';
+            btn.style.background = 'linear-gradient(to right, var(--verde-temu), #2ecc71)';
+            setTimeout(() => {
+              btn.innerHTML = '<i class="fas fa-cart-plus"></i> Agregar';
+              btn.style.background = 'linear-gradient(to right, var(--rojo-temu), var(--naranja-temu))';
+            }, 1000);
+            
             return;
           }
         });
@@ -1255,7 +1455,7 @@
         }
         this.saveToStorage();
         this.updateUI();
-        this.toast("✅ Producto agregado");
+        this.toast("✅ Producto agregado al carrito");
         
         // Abrir el carrito automáticamente al agregar un producto
         if (!this.carritoAbierto && this.totalItems === 1) {
@@ -1336,7 +1536,7 @@
       renderCart(){
         if (this.items.size === 0){
           this.itemsCarritoFlotante.innerHTML = `
-            <div class="mensaje-vacio-flotante">
+            <div class="mensaje-vacio-flotante-temu">
               <i class="fas fa-shopping-cart"></i>
               <p>Tu carrito está vacío</p>
               <p>Agrega productos para comenzar</p>
@@ -1349,22 +1549,20 @@
         this.items.forEach(it => {
           const totalIt = it.precio * it.cantidad;
           html += `
-            <div class="item-carrito-flotante">
-              <div class="info-item-flotante">
-                <div class="nombre-item-flotante">${it.nombre}</div>
-                <div class="meta-item-flotante">
-                  <div>Unitario: <b>${money(it.precio)}</b></div>
-                  <div class="qty-row-flotante">
-                    <button class="btn-qty-flotante" data-cart="dec" data-id="${it.id}">-</button>
-                    <span class="qty-flotante">${it.cantidad}</span>
-                    <button class="btn-qty-flotante" data-cart="inc" data-id="${it.id}">+</button>
-                  </div>
+            <div class="item-carrito-flotante-temu">
+              <div class="info-item-flotante-temu">
+                <div class="nombre-item-flotante-temu">${it.nombre}</div>
+                <div class="precio-unitario-flotante-temu">${money(it.precio)} c/u</div>
+                <div class="qty-row-flotante-temu">
+                  <button class="btn-qty-flotante-temu" data-cart="dec" data-id="${it.id}">-</button>
+                  <span class="qty-flotante-temu">${it.cantidad}</span>
+                  <button class="btn-qty-flotante-temu" data-cart="inc" data-id="${it.id}">+</button>
                 </div>
               </div>
               <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;">
-                <div class="total-item-flotante">${money(totalIt)}</div>
-                <button class="btn-x-flotante" data-cart="del" data-id="${it.id}">
-                  <i class="fas fa-times"></i>
+                <div class="total-item-flotante-temu">${money(totalIt)}</div>
+                <button class="btn-x-flotante-temu" data-cart="del" data-id="${it.id}">
+                  <i class="fas fa-trash"></i>
                 </button>
               </div>
             </div>
@@ -1464,31 +1662,34 @@
           position: fixed;
           bottom: 120px;
           right: 20px;
-          background: rgba(0, 100, 0, 0.9);
+          background: linear-gradient(to right, var(--rojo-temu), var(--naranja-temu));
           color: white;
-          padding: 10px 18px;
-          border-radius: 8px;
-          box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+          padding: 12px 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
           z-index: 10000;
-          font-weight: 600;
+          font-weight: 900;
           max-width: 300px;
           text-align: center;
           font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
         `;
-        el.textContent = text;
+        el.innerHTML = `<i class="fas fa-check-circle"></i> ${text}`;
         document.body.appendChild(el);
         setTimeout(() => {
           el.style.opacity = "0";
           el.style.transition = "opacity 0.3s ease";
           setTimeout(() => el.remove(), 300);
-        }, 1500);
+        }, 2000);
       }
     }
 
     // ==================== INIT ====================
-    let carrito;
+    let carritoTemu;
     document.addEventListener("DOMContentLoaded", () => {
-      carrito = new CarritoFlotante();
+      carritoTemu = new CarritoFlotanteTemu();
     });
   </script>
 </body>
