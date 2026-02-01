@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>De Todos Café - Menú Digital & Pedidos</title>
+  <title>DeTodos Café - Menú Digital & Pedidos</title>
 
   <meta name="description" content="Menú digital de De Todos Café. Pedidos por WhatsApp: Café, limonadas granizadas, sodas, granizados y combos. Delivery disponible.">
   <meta name="keywords" content="café, menú digital, pedidos WhatsApp, limonadas, granizados, delivery, comida rápida, bebidas">
@@ -827,8 +827,9 @@
             <option value="para_llevar">Para llevar</option>
             <option value="consumir_local">Consumir en el local</option>
           </select>
+          <!-- CAMBIADO: Mensaje actualizado -->
           <div class="mini-ayuda-flotante-temu" id="ayudaEmpaqueFlotanteTemu">
-            <i class="fas fa-info-circle"></i> Para llevar / Domicilio: se suma $1.000 por empaque.
+            <i class="fas fa-info-circle"></i> Para llevar / Domicilio: se suma $1.000 por unidad por empaque.
           </div>
         </div>
 
@@ -926,7 +927,7 @@
       tiempoEstimadoMin: 30,
       costoEnvioBase: 3000,
       envioGratisDesde: 25000,
-      costoEmpaque: 1000,
+      costoEmpaquePorUnidad: 1000, // CAMBIADO: $1.000 por unidad
       nequi: { numero: "3222096301", titular: "Vigny Valencia" },
       localDireccion: "📍 Ubicación variable - Consultar disponibilidad al hacer pedido"
     };
@@ -1481,7 +1482,7 @@
         this.toast("🗑️ Producto eliminado");
       }
 
-      // ------- Totals -------
+      // ------- Totals ------- CAMBIADO: Empaque por unidad
       updateTotals(){
         this.subtotal = 0;
         this.totalItems = 0;
@@ -1499,9 +1500,9 @@
           this.envio = 0;
         }
 
-        // Empaque (+$1.000) si es domicilio o para llevar
+        // CAMBIADO: Empaque $1.000 por unidad si es domicilio o para llevar
         if (tipo === "domicilio" || tipo === "para_llevar"){
-          this.empaque = (this.totalItems > 0) ? CONFIG.costoEmpaque : 0;
+          this.empaque = this.totalItems * CONFIG.costoEmpaquePorUnidad;
         } else {
           this.empaque = 0;
         }
@@ -1616,7 +1617,8 @@
         msg += `———————————————\n`;
         msg += `💰 Subtotal: ${money(this.subtotal)}\n`;
         msg += `🚚 Envío: ${this.envio === 0 ? "Gratis" : money(this.envio)}\n`;
-        msg += `🧴 Empaque: ${money(this.empaque)}\n`;
+        // CAMBIADO: Mostrar empaque por unidad en el mensaje
+        msg += `📦 Empaque (${this.totalItems} unidad${this.totalItems !== 1 ? 'es' : ''}): ${money(this.empaque)}\n`;
         msg += `✅ Total a pagar: *${money(this.total)}*\n`;
         msg += `———————————————\n\n`;
         msg += `¿Me confirmas disponibilidad y hora aproximada? ¡Gracias! 🙌`;
