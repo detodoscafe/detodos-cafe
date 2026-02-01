@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DeTodos Café - Menú Digital & Pedidos</title>
+  <title>De Todos Café - Menú Digital & Pedidos</title>
 
   <meta name="description" content="Menú digital de De Todos Café. Pedidos por WhatsApp: Café, limonadas granizadas, sodas, granizados y combos. Delivery disponible.">
   <meta name="keywords" content="café, menú digital, pedidos WhatsApp, limonadas, granizados, delivery, comida rápida, bebidas">
@@ -13,13 +13,14 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
   <style>
     :root{
       --cafe-oscuro:#3b1f0f; --cafe-medio:#8B4513; --cafe-claro:#D2691E;
       --whatsapp:#25D366; --texto:#2C1810; --acento:#FF6B35; --border:#E8D9C5;
       --bg:#faf7f2; --rojo-temu:#ff3b30; --verde-temu:#34c759; --naranja-temu:#ff9500;
+      --dorado:#FFB000; --gradiente-dorado:linear-gradient(135deg, #FFB000, #FF6B35);
     }
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -27,7 +28,7 @@
       font-family:'Inter','Segoe UI',sans-serif;
       background:linear-gradient(135deg,#f7f3ef 0%,#f0e6d6 100%);
       color:var(--texto); line-height:1.6; min-height:100vh;
-      padding-bottom:80px; /* Espacio para botón flotante */
+      padding-bottom:100px; /* Espacio para botón flotante */
     }
 
     .header{
@@ -297,371 +298,503 @@
       transform: scale(1.2);
     }
 
-    /* ========== CARRITO FLOTANTE AL ESTILO TEMU ========== */
-    /* BOTÓN CARRITO FLOTANTE - TEMU STYLE */
+    /* ========== CARRITO FLOTANTE REDISEÑADO - MÁS GRANDE Y VISUAL ========== */
+    /* BOTÓN CARRITO FLOTANTE - NUEVO ESTILO PREMIUM */
     .carrito-boton-flotante {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 30px;
+      right: 30px;
       z-index: 9999;
     }
 
-    .btn-carrito-flotante-temu {
-      background: linear-gradient(to right, var(--rojo-temu), var(--naranja-temu));
+    .btn-carrito-flotante-premium {
+      background: linear-gradient(135deg, var(--dorado), var(--naranja-temu));
       color: #fff;
       border: none;
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
-      font-size: 1rem;
+      padding: 1.2rem 2rem;
+      border-radius: 20px;
+      font-size: 1.1rem;
       font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
       transition: all 0.3s;
-      box-shadow: 0 6px 20px rgba(255, 59, 48, 0.3);
-      min-width: 200px;
+      box-shadow: 0 10px 30px rgba(255, 176, 0, 0.4);
+      min-width: 250px;
       position: relative;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
     }
 
     @media(max-width:768px){
-      .btn-carrito-flotante-temu {
-        min-width: 60px;
-        width: 60px;
-        height: 60px;
+      .btn-carrito-flotante-premium {
+        min-width: 70px;
+        width: 70px;
+        height: 70px;
         border-radius: 50%;
         padding: 0;
       }
-      .btn-carrito-flotante-temu span {
+      .btn-carrito-flotante-premium span {
         display: none;
       }
     }
 
-    .btn-carrito-flotante-temu:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(255, 59, 48, 0.4);
+    .btn-carrito-flotante-premium:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(255, 176, 0, 0.6);
     }
 
-    .badge-carrito-flotante-temu {
+    .badge-carrito-flotante-premium {
       position: absolute;
-      top: -8px;
-      right: -8px;
+      top: -10px;
+      right: -10px;
       background: #fff;
-      color: var(--rojo-temu);
-      width: 26px;
-      height: 26px;
+      color: var(--dorado);
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       font-weight: 900;
-      border: 2px solid var(--rojo-temu);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      border: 3px solid var(--dorado);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
     @media(max-width:768px){
-      .badge-carrito-flotante-temu {
-        top: -5px;
-        right: -5px;
-        width: 22px;
-        height: 22px;
-        font-size: 0.7rem;
+      .badge-carrito-flotante-premium {
+        top: -8px;
+        right: -8px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
       }
     }
 
-    /* CARRITO FLOTANTE TEMU */
-    .carrito-flotante-temu {
+    /* CARRITO FLOTANTE PREMIUM - MUCHO MÁS GRANDE */
+    .carrito-flotante-premium {
       position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 380px;
-      max-height: 550px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 800px;
+      height: 85vh;
+      max-height: 700px;
       background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border-radius: 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
       z-index: 9998;
       overflow: hidden;
       display: none;
-      transition: all 0.3s ease;
-      border: 1px solid #e0e0e0;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255, 176, 0, 0.2);
     }
 
-    .carrito-flotante-temu.abierto {
+    .carrito-flotante-premium.abierto {
       display: flex;
       flex-direction: column;
-      animation: slideUp 0.3s ease;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    @keyframes slideUp {
-      from {
+    @keyframes popIn {
+      0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translate(-50%, -50%) scale(0.8);
       }
-      to {
+      100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, -50%) scale(1);
       }
     }
 
-    .cabecera-carrito-flotante-temu {
-      background: linear-gradient(to right, var(--rojo-temu), var(--naranja-temu));
+    /* Cabecera del carrito premium */
+    .cabecera-carrito-flotante-premium {
+      background: linear-gradient(135deg, var(--dorado), var(--naranja-temu));
       color: #fff;
-      padding: 1rem 1.2rem;
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .cabecera-carrito-flotante-temu h3 {
+    .cabecera-carrito-flotante-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 100c0-27.6 22.4-50 50-50s50 22.4 50 50-22.4 50-50 50-50-22.4-50-50z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    .cabecera-carrito-flotante-premium h3 {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.8rem;
       margin: 0;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.8rem;
+      position: relative;
+      z-index: 1;
+      font-weight: 800;
     }
 
-    .badge-carrito-cabecera-temu {
+    .badge-carrito-cabecera-premium {
       background: #fff;
-      color: var(--rojo-temu);
-      width: 24px;
-      height: 24px;
+      color: var(--dorado);
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.9rem;
       font-weight: 900;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-left: 0.5rem;
     }
 
-    .btn-cerrar-carrito-temu {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.3);
+    .btn-cerrar-carrito-premium {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.5);
       color: #fff;
-      padding: 0.4rem 0.8rem;
-      border-radius: 10px;
-      font-size: 0.8rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.25s;
-    }
-
-    .btn-cerrar-carrito-temu:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    .contenido-carrito-flotante-temu {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1.2rem;
-    }
-
-    .items-carrito-flotante-temu {
-      max-height: 220px;
-      overflow-y: auto;
-      margin-bottom: 1.2rem;
-    }
-
-    .item-carrito-flotante-temu {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 0.8rem;
-      padding: 0.8rem;
-      margin-bottom: 0.8rem;
-      background: #f9f9f9;
-      border-radius: 10px;
-      border: 1px solid #eaeaea;
-    }
-
-    .info-item-flotante-temu {
-      flex: 1;
-    }
-
-    .nombre-item-flotante-temu {
-      font-weight: 900;
-      font-size: 0.9rem;
-      margin-bottom: 0.3rem;
-      color: #333;
-    }
-
-    .precio-unitario-flotante-temu {
-      font-size: 0.85rem;
-      color: var(--rojo-temu);
-      font-weight: 900;
-    }
-
-    .qty-row-flotante-temu {
+      font-weight: 700;
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 0.5rem;
+      position: relative;
+      z-index: 1;
     }
 
-    .btn-qty-flotante-temu {
-      width: 28px;
-      height: 28px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
+    .btn-cerrar-carrito-premium:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Contenido del carrito premium */
+    .contenido-carrito-flotante-premium {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Secciones del carrito */
+    .seccion-carrito-premium {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      border: 1px solid #f0f0f0;
+    }
+
+    .titulo-seccion-premium {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--cafe-oscuro);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 2px solid rgba(255, 176, 0, 0.2);
+    }
+
+    .titulo-seccion-premium i {
+      color: var(--dorado);
+    }
+
+    /* Elementos del carrito - MÁS GRANDES */
+    .items-carrito-flotante-premium {
+      max-height: 280px;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .item-carrito-flotante-premium {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #fffaf0, #fff5e6);
+      border-radius: 15px;
+      border: 2px solid rgba(255, 176, 0, 0.1);
+      transition: all 0.2s;
+    }
+
+    .item-carrito-flotante-premium:hover {
+      border-color: rgba(255, 176, 0, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 176, 0, 0.1);
+    }
+
+    .info-item-flotante-premium {
+      flex: 1;
+    }
+
+    .nombre-item-flotante-premium {
+      font-weight: 900;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--cafe-oscuro);
+    }
+
+    .precio-unitario-flotante-premium {
+      font-size: 0.95rem;
+      color: var(--dorado);
+      font-weight: 900;
+    }
+
+    .qty-row-flotante-premium {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .btn-qty-flotante-premium {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      border: 2px solid var(--dorado);
       background: #fff;
       cursor: pointer;
       font-weight: 900;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s;
+      color: var(--dorado);
     }
 
-    .btn-qty-flotante-temu:hover {
-      border-color: var(--rojo-temu);
-      background: #fff5f5;
+    .btn-qty-flotante-premium:hover {
+      background: var(--dorado);
+      color: #fff;
+      transform: scale(1.1);
     }
 
-    .qty-flotante-temu {
-      min-width: 24px;
+    .qty-flotante-premium {
+      min-width: 30px;
       text-align: center;
       font-weight: 900;
       color: #333;
+      font-size: 1.1rem;
     }
 
-    .total-item-flotante-temu {
+    .total-item-flotante-premium {
       font-weight: 900;
-      color: var(--rojo-temu);
-      font-size: 1rem;
+      color: var(--dorado);
+      font-size: 1.2rem;
+      min-width: 100px;
+      text-align: right;
     }
 
-    .btn-x-flotante-temu {
+    .btn-x-flotante-premium {
       background: transparent;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 0.3rem 0.6rem;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: all 0.2s;
-    }
-
-    .btn-x-flotante-temu:hover {
-      border-color: var(--rojo-temu);
-      background: #fff5f5;
-      color: var(--rojo-temu);
-    }
-
-    .total-pedido-flotante-temu {
-      border-top: 2px solid #eee;
-      padding-top: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .fila-total-flotante-temu {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
-
-    .monto-total-flotante-temu {
-      font-weight: 900;
-      font-size: 1.3rem;
-      color: var(--rojo-temu);
-    }
-
-    .opciones-carrito-flotante-temu {
-      border: 1px dashed #ddd;
+      border: 2px solid #ffcccc;
       border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 1.2rem;
-      background: #fcfcfc;
-    }
-
-    .titulo-bloque-flotante-temu {
-      font-weight: 900;
-      font-size: 0.95rem;
-      color: #333;
+      padding: 0.5rem 0.9rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      color: #ff6666;
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .fila-opciones-flotante-temu {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      margin: 0.5rem 0 0.8rem 0;
-    }
-
-    .label-mini-flotante-temu {
-      font-size: 0.8rem;
-      color: #666;
       font-weight: 700;
     }
 
-    select.flotante-temu, input.flotante-temu {
+    .btn-x-flotante-premium:hover {
+      border-color: #ff6666;
+      background: #ffe6e6;
+      color: #ff3333;
+      transform: scale(1.05);
+    }
+
+    /* Opciones del pedido - MÁS VISIBLES */
+    .fila-opciones-premium {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+      margin: 1rem 0 1.5rem 0;
+    }
+
+    .grupo-opcion-premium {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .label-mini-premium {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    select.flotante-premium, input.flotante-premium {
       width: 100%;
-      padding: 0.7rem 0.8rem;
-      border: 1px solid #ddd;
-      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
       background: #fff;
       font-family: inherit;
-      font-size: 0.9rem;
+      font-size: 1rem;
       outline: none;
-      transition: border 0.2s;
+      transition: all 0.2s;
+      font-weight: 500;
     }
 
-    select.flotante-temu:focus, input.flotante-temu:focus {
-      border-color: var(--rojo-temu);
+    select.flotante-premium:focus, input.flotante-premium:focus {
+      border-color: var(--dorado);
+      box-shadow: 0 0 0 3px rgba(255, 176, 0, 0.2);
     }
 
-    .mini-ayuda-flotante-temu {
-      font-size: 0.8rem;
-      color: #666;
+    .mini-ayuda-premium {
+      font-size: 0.85rem;
+      color: #888;
       margin-top: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .mensaje-vacio-flotante-temu {
+    .mini-ayuda-premium i {
+      color: var(--dorado);
+    }
+
+    /* Total del pedido - DESTACADO */
+    .total-pedido-flotante-premium {
+      background: linear-gradient(135deg, #fffaf0, #fff5e6);
+      border-radius: 20px;
+      padding: 1.8rem;
+      margin: 1.5rem 0;
+      border: 2px solid rgba(255, 176, 0, 0.2);
+    }
+
+    .fila-total-flotante-premium {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed rgba(0,0,0,0.1);
+    }
+
+    .fila-total-flotante-premium:last-child {
+      border-bottom: none;
+    }
+
+    .monto-total-flotante-premium {
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--dorado);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .monto-total-flotante-premium span:first-child {
+      font-size: 1.3rem;
+      color: var(--cafe-oscuro);
+    }
+
+    /* Mensaje carrito vacío */
+    .mensaje-vacio-flotante-premium {
       text-align: center;
-      padding: 2rem 1rem;
-      color: #999;
+      padding: 3rem 1rem;
+      color: #aaa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
     }
 
-    .mensaje-vacio-flotante-temu i {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+    .mensaje-vacio-flotante-premium i {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
       opacity: 0.3;
+      color: var(--dorado);
     }
 
-    .mensaje-vacio-flotante-temu p {
+    .mensaje-vacio-flotante-premium h4 {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #777;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .mensaje-vacio-flotante-premium p {
       margin-bottom: 0.5rem;
+      max-width: 300px;
     }
 
-    /* BOTÓN WHATSAPP DENTRO DEL CARRITO TEMU */
-    .btn-whatsapp-carrito-temu {
-      background: linear-gradient(to right, var(--whatsapp), #1da851);
+    /* BOTÓN WHATSAPP GRANDE Y DESTACADO */
+    .btn-whatsapp-carrito-premium {
+      background: linear-gradient(135deg, var(--whatsapp), #1da851);
       color: #fff;
       border: none;
       width: 100%;
-      padding: 1rem;
-      border-radius: 12px;
-      font-size: 1rem;
+      padding: 1.3rem;
+      border-radius: 15px;
+      font-size: 1.2rem;
       font-weight: 900;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
       transition: all 0.3s;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
-      margin-top: 1rem;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+      margin-top: auto;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .btn-whatsapp-carrito-temu:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.4);
+    .btn-whatsapp-carrito-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
     }
 
-    .btn-whatsapp-carrito-temu:disabled {
+    .btn-whatsapp-carrito-premium:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+    }
+
+    .btn-whatsapp-carrito-premium:hover:not(:disabled)::before {
+      left: 100%;
+    }
+
+    .btn-whatsapp-carrito-premium:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
@@ -669,33 +802,40 @@
     }
 
     /* Overlay para cerrar carrito */
-    .overlay-carrito-temu {
+    .overlay-carrito-premium {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.7);
       z-index: 9997;
       display: none;
+      backdrop-filter: blur(5px);
     }
 
-    .overlay-carrito-temu.mostrar {
+    .overlay-carrito-premium.mostrar {
       display: block;
+      animation: fadeIn 0.3s ease;
     }
 
-    .items-carrito-flotante-temu::-webkit-scrollbar {
-      width: 5px;
+    /* Scrollbar personalizado */
+    .items-carrito-flotante-premium::-webkit-scrollbar {
+      width: 8px;
     }
 
-    .items-carrito-flotante-temu::-webkit-scrollbar-track {
+    .items-carrito-flotante-premium::-webkit-scrollbar-track {
       background: #f1f1f1;
-      border-radius: 3px;
+      border-radius: 10px;
     }
 
-    .items-carrito-flotante-temu::-webkit-scrollbar-thumb {
-      background: var(--rojo-temu);
-      border-radius: 3px;
+    .items-carrito-flotante-premium::-webkit-scrollbar-thumb {
+      background: var(--dorado);
+      border-radius: 10px;
+    }
+
+    .items-carrito-flotante-premium::-webkit-scrollbar-thumb:hover {
+      background: var(--naranja-temu);
     }
 
     /* MENÚ CATEGORÍAS MÓVIL */
@@ -735,36 +875,72 @@
       .logo{font-size:1.4rem}
       .container{padding:1rem; margin-left: 0;}
       .grid-productos{grid-template-columns:repeat(2, 1fr)}
-      .carrito-flotante-temu {
-        width: calc(100% - 40px);
-        max-height: 70vh;
-        bottom: 90px;
+      .carrito-flotante-premium {
+        width: 95%;
+        height: 90vh;
+        border-radius: 20px;
       }
-      .btn-carrito-flotante-temu {
-        min-width: 180px;
-        padding: 0.9rem 1.2rem;
-        font-size: 0.9rem;
+      .btn-carrito-flotante-premium {
+        min-width: 200px;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+      }
+      .cabecera-carrito-flotante-premium {
+        padding: 1.2rem 1.5rem;
+      }
+      .cabecera-carrito-flotante-premium h3 {
+        font-size: 1.4rem;
+      }
+      .contenido-carrito-flotante-premium {
+        padding: 1.5rem;
+      }
+      .seccion-carrito-premium {
+        padding: 1.2rem;
+      }
+      .fila-opciones-premium {
+        grid-template-columns: 1fr;
       }
     }
     @media(max-width:480px){
       .grid-productos{grid-template-columns:1fr}
       .producto-temu{padding:0.8rem}
-      .btn-carrito-flotante-temu {
-        min-width: 150px;
-        padding: 0.8rem 1rem;
-        font-size: 0.85rem;
+      .btn-carrito-flotante-premium {
+        min-width: 180px;
+        padding: 0.9rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      .item-carrito-flotante-premium {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .total-item-flotante-premium {
+        text-align: left;
+        width: 100%;
+        margin-top: 0.5rem;
       }
     }
 
     @media(min-width:1024px){
       .carrito-boton-flotante {
-        bottom: 30px;
-        right: 30px;
+        bottom: 40px;
+        right: 40px;
       }
-      .carrito-flotante-temu {
-        bottom: 100px;
-        right: 30px;
+      .carrito-flotante-premium {
+        width: 85%;
+        max-width: 850px;
       }
+    }
+
+    /* Animación para el badge del carrito */
+    @keyframes bounce {
+      0%, 20%, 60%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-10px);}
+      80% {transform: translateY(-5px);}
+    }
+
+    .badge-bounce {
+      animation: bounce 0.5s;
     }
   </style>
 </head>
@@ -799,109 +975,141 @@
   </main>
 
   <!-- Overlay para cerrar carrito -->
-  <div class="overlay-carrito-temu" id="overlayCarritoTemu"></div>
+  <div class="overlay-carrito-premium" id="overlayCarritoPremium"></div>
 
-  <!-- Carrito flotante estilo Temu -->
-  <div class="carrito-flotante-temu" id="carritoFlotanteTemu">
-    <div class="cabecera-carrito-flotante-temu">
+  <!-- Carrito flotante premium - MÁS GRANDE Y VISUAL -->
+  <div class="carrito-flotante-premium" id="carritoFlotantePremium">
+    <div class="cabecera-carrito-flotante-premium">
       <h3>
         <i class="fas fa-shopping-cart"></i>
-        Tu Carrito
-        <span class="badge-carrito-cabecera-temu" id="badgeCarritoFlotanteTemu">0</span>
+        Tu Carrito de Compras
+        <span class="badge-carrito-cabecera-premium" id="badgeCarritoFlotantePremium">0</span>
       </h3>
-      <button class="btn-cerrar-carrito-temu" id="btnCerrarCarritoTemu">
+      <button class="btn-cerrar-carrito-premium" id="btnCerrarCarritoPremium">
         <i class="fas fa-times"></i> Cerrar
       </button>
     </div>
 
-    <div class="contenido-carrito-flotante-temu">
-      <div class="opciones-carrito-flotante-temu">
-        <div class="titulo-bloque-flotante-temu">
-          <i class="fas fa-sliders"></i> Datos del pedido
+    <div class="contenido-carrito-flotante-premium">
+      <!-- Sección 1: Resumen del pedido -->
+      <div class="seccion-carrito-premium">
+        <div class="titulo-seccion-premium">
+          <i class="fas fa-clipboard-list"></i>
+          Resumen de tu pedido
         </div>
 
-        <div class="fila-opciones-flotante-temu">
-          <div class="label-mini-flotante-temu">Tipo de pedido</div>
-          <select id="tipoPedidoFlotanteTemu" class="flotante-temu">
-            <option value="domicilio">Domicilio</option>
-            <option value="para_llevar">Para llevar</option>
-            <option value="consumir_local">Consumir en el local</option>
-          </select>
-          <!-- CAMBIADO: Mensaje actualizado -->
-          <div class="mini-ayuda-flotante-temu" id="ayudaEmpaqueFlotanteTemu">
-            <i class="fas fa-info-circle"></i> Para llevar / Domicilio: se suma $1.000 por unidad por empaque.
+        <!-- ITEMS DEL CARRITO -->
+        <div class="items-carrito-flotante-premium" id="itemsCarritoFlotantePremium">
+          <div class="mensaje-vacio-flotante-premium">
+            <i class="fas fa-shopping-basket"></i>
+            <h4>Tu carrito está vacío</h4>
+            <p>Agrega productos desde el menú para comenzar tu pedido</p>
+            <p style="font-size:0.9rem;margin-top:1rem;color:#bbb;">¡Prueba nuestras deliciosas limonadas o cafés!</p>
           </div>
-        </div>
-
-        <div class="fila-opciones-flotante-temu" id="filaDireccionFlotanteTemu" style="display:block;">
-          <div class="label-mini-flotante-temu">Dirección (solo si es domicilio)</div>
-          <input id="direccionEntregaFlotanteTemu" class="flotante-temu" type="text" placeholder="Ej: Calle 12 #34-56, Barrio..." />
-        </div>
-
-        <div class="fila-opciones-flotante-temu">
-          <div class="label-mini-flotante-temu">Forma de pago</div>
-          <select id="formaPagoFlotanteTemu" class="flotante-temu">
-            <option value="nequi">Nequi</option>
-            <option value="efectivo">Efectivo</option>
-          </select>
-          <div class="mini-ayuda-flotante-temu" id="detallePagoFlotanteTemu">
-            <i class="fas fa-money-bill-wave"></i>
-            Nequi: 3222096301 — Vigny Valencia
-          </div>
-        </div>
-
-        <div class="fila-opciones-flotante-temu">
-          <div class="label-mini-flotante-temu">Nombre de quien recoge</div>
-          <input id="nombreClienteFlotanteTemu" class="flotante-temu" type="text" placeholder="Ej: Juan Pérez" />
-        </div>
-
-        <div class="mini-ayuda-flotante-temu">
-          <i class="fas fa-clock"></i> Tiempo estimado: <b>30 minutos</b>.
         </div>
       </div>
 
-      <!-- ITEMS -->
-      <div class="items-carrito-flotante-temu" id="itemsCarritoFlotanteTemu">
-        <div class="mensaje-vacio-flotante-temu">
-          <i class="fas fa-shopping-cart"></i>
-          <p>Tu carrito está vacío</p>
-          <p>Agrega productos para comenzar</p>
+      <!-- Sección 2: Datos del pedido -->
+      <div class="seccion-carrito-premium">
+        <div class="titulo-seccion-premium">
+          <i class="fas fa-user-check"></i>
+          Datos del pedido
+        </div>
+
+        <div class="fila-opciones-premium">
+          <div class="grupo-opcion-premium">
+            <label class="label-mini-premium">
+              <i class="fas fa-truck"></i>
+              Tipo de pedido
+            </label>
+            <select id="tipoPedidoPremium" class="flotante-premium">
+              <option value="domicilio">🚚 Domicilio</option>
+              <option value="para_llevar">📦 Para llevar</option>
+              <option value="consumir_local">🏠 Consumir en el local</option>
+            </select>
+            <div class="mini-ayuda-premium" id="ayudaEmpaquePremium">
+              <i class="fas fa-info-circle"></i> Empaque: $1.000 por unidad
+            </div>
+          </div>
+
+          <div class="grupo-opcion-premium" id="grupoDireccionPremium" style="display:block;">
+            <label class="label-mini-premium">
+              <i class="fas fa-map-marker-alt"></i>
+              Dirección (solo domicilio)
+            </label>
+            <input id="direccionEntregaPremium" class="flotante-premium" type="text" placeholder="Ej: Calle 12 #34-56, Barrio..." />
+          </div>
+        </div>
+
+        <div class="fila-opciones-premium">
+          <div class="grupo-opcion-premium">
+            <label class="label-mini-premium">
+              <i class="fas fa-money-bill-wave"></i>
+              Forma de pago
+            </label>
+            <select id="formaPagoPremium" class="flotante-premium">
+              <option value="nequi">💳 Nequi</option>
+              <option value="efectivo">💵 Efectivo</option>
+            </select>
+            <div class="mini-ayuda-premium" id="detallePagoPremium">
+              <i class="fas fa-wallet"></i>
+              Nequi: 3222096301 — Vigny Valencia
+            </div>
+          </div>
+
+          <div class="grupo-opcion-premium">
+            <label class="label-mini-premium">
+              <i class="fas fa-user"></i>
+              Nombre para el pedido
+            </label>
+            <input id="nombreClientePremium" class="flotante-premium" type="text" placeholder="Ej: Juan Pérez" />
+            <div class="mini-ayuda-premium">
+              <i class="fas fa-clock"></i> Tiempo estimado: <b>30 minutos</b>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- TOTALES -->
-      <div class="total-pedido-flotante-temu">
-        <div class="fila-total-flotante-temu">
+      <!-- Sección 3: Total del pedido -->
+      <div class="total-pedido-flotante-premium">
+        <div class="titulo-seccion-premium" style="border:none;margin-bottom:1rem;padding-bottom:0;">
+          <i class="fas fa-receipt"></i>
+          Total a pagar
+        </div>
+
+        <div class="fila-total-flotante-premium">
           <span>Subtotal:</span>
-          <span id="subtotalFlotanteTemu">$0</span>
+          <span id="subtotalPremium">$0</span>
         </div>
-        <div class="fila-total-flotante-temu">
+        <div class="fila-total-flotante-premium">
           <span>Envío:</span>
-          <span id="envioFlotanteTemu">$0</span>
+          <span id="envioPremium">$0</span>
         </div>
-        <div class="fila-total-flotante-temu">
+        <div class="fila-total-flotante-premium">
           <span>Empaque:</span>
-          <span id="empaqueFlotanteTemu">$0</span>
+          <span id="empaquePremium">$0</span>
         </div>
-        <div class="fila-total-flotante-temu monto-total-flotante-temu">
-          <span>Total:</span>
-          <span id="totalFlotanteTemu">$0</span>
+        <div class="fila-total-flotante-premium monto-total-flotante-premium">
+          <span>TOTAL:</span>
+          <span id="totalPremium">$0</span>
         </div>
       </div>
 
-      <!-- BOTÓN WHATSAPP DENTRO DEL CARRITO -->
-      <button class="btn-whatsapp-carrito-temu" id="btnWhatsappCarritoTemu" disabled>
-        <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
+      <!-- BOTÓN WHATSAPP GRANDE -->
+      <button class="btn-whatsapp-carrito-premium" id="btnWhatsappCarritoPremium" disabled>
+        <i class="fab fa-whatsapp"></i> 
+        <span>ENVIAR PEDIDO POR WHATSAPP</span>
+        <i class="fas fa-paper-plane" style="margin-left:0.5rem;"></i>
       </button>
     </div>
   </div>
 
-  <!-- Botón Carrito flotante estilo Temu -->
+  <!-- Botón Carrito flotante premium -->
   <div class="carrito-boton-flotante">
-    <button class="btn-carrito-flotante-temu" id="btnCarritoFlotanteTemu">
+    <button class="btn-carrito-flotante-premium" id="btnCarritoFlotantePremium">
       <i class="fas fa-shopping-cart"></i>
-      <span>Ver Carrito</span>
-      <span class="badge-carrito-flotante-temu" id="badgeCarritoBotonTemu">0</span>
+      <span>VER CARRITO</span>
+      <span class="badge-carrito-flotante-premium" id="badgeCarritoBotonPremium">0</span>
     </button>
   </div>
 
@@ -927,7 +1135,7 @@
       tiempoEstimadoMin: 30,
       costoEnvioBase: 3000,
       envioGratisDesde: 25000,
-      costoEmpaquePorUnidad: 1000, // CAMBIADO: $1.000 por unidad
+      costoEmpaquePorUnidad: 1000,
       nequi: { numero: "3222096301", titular: "Vigny Valencia" },
       localDireccion: "📍 Ubicación variable - Consultar disponibilidad al hacer pedido"
     };
@@ -1080,8 +1288,8 @@
       return stars;
     };
 
-    // ==================== CARRITO FLOTANTE TEMU ====================
-    class CarritoFlotanteTemu {
+    // ==================== CARRITO FLOTANTE PREMIUM ====================
+    class CarritoFlotantePremium {
       constructor(){
         this.items = new Map();
         this.subtotal = 0;
@@ -1089,7 +1297,7 @@
         this.empaque = 0;
         this.total = 0;
         this.totalItems = 0;
-        this.storageKey = "carritoDeTodosCafe_temu_prod";
+        this.storageKey = "carritoDeTodosCafe_premium_prod";
         this.carritoAbierto = false;
         this.categoriaActual = menuData.categorias[0].id;
         this.menuMovilAbierto = false;
@@ -1099,27 +1307,27 @@
       }
 
       cacheDom(){
-        // Elementos del carrito flotante Temu
-        this.carritoFlotante = document.getElementById("carritoFlotanteTemu");
-        this.overlayCarrito = document.getElementById("overlayCarritoTemu");
-        this.btnCerrarCarrito = document.getElementById("btnCerrarCarritoTemu");
-        this.btnCarritoFlotante = document.getElementById("btnCarritoFlotanteTemu");
-        this.itemsCarritoFlotante = document.getElementById("itemsCarritoFlotanteTemu");
-        this.badgeCarritoFlotante = document.getElementById("badgeCarritoFlotanteTemu");
-        this.badgeCarritoBoton = document.getElementById("badgeCarritoBotonTemu");
-        this.subtotalFlotante = document.getElementById("subtotalFlotanteTemu");
-        this.envioFlotante = document.getElementById("envioFlotanteTemu");
-        this.empaqueFlotante = document.getElementById("empaqueFlotanteTemu");
-        this.totalFlotante = document.getElementById("totalFlotanteTemu");
-        this.btnWhatsappCarrito = document.getElementById("btnWhatsappCarritoTemu");
+        // Elementos del carrito flotante Premium
+        this.carritoFlotante = document.getElementById("carritoFlotantePremium");
+        this.overlayCarrito = document.getElementById("overlayCarritoPremium");
+        this.btnCerrarCarrito = document.getElementById("btnCerrarCarritoPremium");
+        this.btnCarritoFlotante = document.getElementById("btnCarritoFlotantePremium");
+        this.itemsCarritoFlotante = document.getElementById("itemsCarritoFlotantePremium");
+        this.badgeCarritoFlotante = document.getElementById("badgeCarritoFlotantePremium");
+        this.badgeCarritoBoton = document.getElementById("badgeCarritoBotonPremium");
+        this.subtotalFlotante = document.getElementById("subtotalPremium");
+        this.envioFlotante = document.getElementById("envioPremium");
+        this.empaqueFlotante = document.getElementById("empaquePremium");
+        this.totalFlotante = document.getElementById("totalPremium");
+        this.btnWhatsappCarrito = document.getElementById("btnWhatsappCarritoPremium");
         
         // Opciones del carrito flotante
-        this.selTipoFlotante = document.getElementById("tipoPedidoFlotanteTemu");
-        this.selPagoFlotante = document.getElementById("formaPagoFlotanteTemu");
-        this.inpNombreFlotante = document.getElementById("nombreClienteFlotanteTemu");
-        this.inpDireccionFlotante = document.getElementById("direccionEntregaFlotanteTemu");
-        this.filaDireccionFlotante = document.getElementById("filaDireccionFlotanteTemu");
-        this.detallePagoFlotante = document.getElementById("detallePagoFlotanteTemu");
+        this.selTipoFlotante = document.getElementById("tipoPedidoPremium");
+        this.selPagoFlotante = document.getElementById("formaPagoPremium");
+        this.inpNombreFlotante = document.getElementById("nombreClientePremium");
+        this.inpDireccionFlotante = document.getElementById("direccionEntregaPremium");
+        this.grupoDireccionFlotante = document.getElementById("grupoDireccionPremium");
+        this.detallePagoFlotante = document.getElementById("detallePagoPremium");
         
         // Menús
         this.menuCategorias = document.getElementById("menuCategorias");
@@ -1141,9 +1349,9 @@
 
         // Instrucciones solo una vez
         setTimeout(() => {
-          if (!localStorage.getItem("instruccionesVistasDeTodosCafeTemu")){
-            alert("🛒 ¡Bienvenido a De Todos Café con estilo Temu!\n\n1) Explora categorías\n2) Agrega productos con 'Agregar'\n3) Toca 'Ver Carrito' para completar tu pedido\n4) ¡Envía por WhatsApp!\n\n¡Disfruta de tu experiencia de compra!");
-            localStorage.setItem("instruccionesVistasDeTodosCafeTemu", "true");
+          if (!localStorage.getItem("instruccionesVistasDeTodosCafePremium")){
+            alert("🛒 ¡Bienvenido a De Todos Café con carrito premium!\n\n1) Explora categorías\n2) Agrega productos con 'Agregar'\n3) Toca 'VER CARRITO' para completar tu pedido\n4) ¡Envía por WhatsApp!\n\n¡Disfruta de tu experiencia de compra premium!");
+            localStorage.setItem("instruccionesVistasDeTodosCafePremium", "true");
           }
         }, 700);
       }
@@ -1408,7 +1616,7 @@
       applyTipoPedidoUI(){
         const t = this.selTipoFlotante.value;
         // Dirección solo si domicilio
-        this.filaDireccionFlotante.style.display = (t === "domicilio") ? "block" : "none";
+        this.grupoDireccionFlotante.style.display = (t === "domicilio") ? "block" : "none";
         if (t !== "domicilio") this.inpDireccionFlotante.value = "";
 
         // Actualizar totales inmediatamente
@@ -1419,9 +1627,9 @@
       applyPagoUI(){
         const p = this.selPagoFlotante.value;
         if (p === "nequi"){
-          this.detallePagoFlotante.innerHTML = `<i class="fas fa-money-bill-wave"></i> Nequi: <b>${CONFIG.nequi.numero}</b> — ${CONFIG.nequi.titular}`;
+          this.detallePagoFlotante.innerHTML = `<i class="fas fa-wallet"></i> Nequi: <b>${CONFIG.nequi.numero}</b> — ${CONFIG.nequi.titular}`;
         } else {
-          this.detallePagoFlotante.innerHTML = `<i class="fas fa-money-bill-wave"></i> Pago en efectivo (al recibir / en caja)`;
+          this.detallePagoFlotante.innerHTML = `<i class="fas fa-wallet"></i> Pago en efectivo (al recibir / en caja)`;
         }
       }
 
@@ -1429,12 +1637,14 @@
         this.carritoFlotante.classList.add('abierto');
         this.overlayCarrito.classList.add('mostrar');
         this.carritoAbierto = true;
+        document.body.style.overflow = 'hidden'; // Prevenir scroll del body
       }
 
       cerrarCarrito(){
         this.carritoFlotante.classList.remove('abierto');
         this.overlayCarrito.classList.remove('mostrar');
         this.carritoAbierto = false;
+        document.body.style.overflow = 'auto'; // Restaurar scroll
       }
 
       toggleCarrito(){
@@ -1458,10 +1668,21 @@
         this.updateUI();
         this.toast("✅ Producto agregado al carrito");
         
+        // Animar el badge
+        this.animateBadge();
+        
         // Abrir el carrito automáticamente al agregar un producto
         if (!this.carritoAbierto && this.totalItems === 1) {
           setTimeout(() => this.abrirCarrito(), 300);
         }
+      }
+
+      animateBadge(){
+        const badge = this.badgeCarritoBoton;
+        badge.classList.add('badge-bounce');
+        setTimeout(() => {
+          badge.classList.remove('badge-bounce');
+        }, 500);
       }
 
       changeQty(id, delta){
@@ -1500,7 +1721,7 @@
           this.envio = 0;
         }
 
-        // CAMBIADO: Empaque $1.000 por unidad si es domicilio o para llevar
+        // Empaque $1.000 por unidad si es domicilio o para llevar
         if (tipo === "domicilio" || tipo === "para_llevar"){
           this.empaque = this.totalItems * CONFIG.costoEmpaquePorUnidad;
         } else {
@@ -1537,10 +1758,11 @@
       renderCart(){
         if (this.items.size === 0){
           this.itemsCarritoFlotante.innerHTML = `
-            <div class="mensaje-vacio-flotante-temu">
-              <i class="fas fa-shopping-cart"></i>
-              <p>Tu carrito está vacío</p>
-              <p>Agrega productos para comenzar</p>
+            <div class="mensaje-vacio-flotante-premium">
+              <i class="fas fa-shopping-basket"></i>
+              <h4>Tu carrito está vacío</h4>
+              <p>Agrega productos desde el menú para comenzar tu pedido</p>
+              <p style="font-size:0.9rem;margin-top:1rem;color:#bbb;">¡Prueba nuestras deliciosas limonadas o cafés!</p>
             </div>
           `;
           return;
@@ -1550,20 +1772,20 @@
         this.items.forEach(it => {
           const totalIt = it.precio * it.cantidad;
           html += `
-            <div class="item-carrito-flotante-temu">
-              <div class="info-item-flotante-temu">
-                <div class="nombre-item-flotante-temu">${it.nombre}</div>
-                <div class="precio-unitario-flotante-temu">${money(it.precio)} c/u</div>
-                <div class="qty-row-flotante-temu">
-                  <button class="btn-qty-flotante-temu" data-cart="dec" data-id="${it.id}">-</button>
-                  <span class="qty-flotante-temu">${it.cantidad}</span>
-                  <button class="btn-qty-flotante-temu" data-cart="inc" data-id="${it.id}">+</button>
+            <div class="item-carrito-flotante-premium">
+              <div class="info-item-flotante-premium">
+                <div class="nombre-item-flotante-premium">${it.nombre}</div>
+                <div class="precio-unitario-flotante-premium">${money(it.precio)} c/u</div>
+                <div class="qty-row-flotante-premium">
+                  <button class="btn-qty-flotante-premium" data-cart="dec" data-id="${it.id}">-</button>
+                  <span class="qty-flotante-premium">${it.cantidad}</span>
+                  <button class="btn-qty-flotante-premium" data-cart="inc" data-id="${it.id}">+</button>
                 </div>
               </div>
-              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;">
-                <div class="total-item-flotante-temu">${money(totalIt)}</div>
-                <button class="btn-x-flotante-temu" data-cart="del" data-id="${it.id}">
-                  <i class="fas fa-trash"></i>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;">
+                <div class="total-item-flotante-premium">${money(totalIt)}</div>
+                <button class="btn-x-flotante-premium" data-cart="del" data-id="${it.id}">
+                  <i class="fas fa-trash"></i> Eliminar
                 </button>
               </div>
             </div>
@@ -1617,7 +1839,6 @@
         msg += `———————————————\n`;
         msg += `💰 Subtotal: ${money(this.subtotal)}\n`;
         msg += `🚚 Envío: ${this.envio === 0 ? "Gratis" : money(this.envio)}\n`;
-        // CAMBIADO: Mostrar empaque por unidad en el mensaje
         msg += `📦 Empaque (${this.totalItems} unidad${this.totalItems !== 1 ? 'es' : ''}): ${money(this.empaque)}\n`;
         msg += `✅ Total a pagar: *${money(this.total)}*\n`;
         msg += `———————————————\n\n`;
@@ -1662,36 +1883,36 @@
         const el = document.createElement("div");
         el.style.cssText = `
           position: fixed;
-          bottom: 120px;
-          right: 20px;
-          background: linear-gradient(to right, var(--rojo-temu), var(--naranja-temu));
+          top: 100px;
+          right: 30px;
+          background: linear-gradient(135deg, var(--dorado), var(--naranja-temu));
           color: white;
-          padding: 12px 20px;
-          border-radius: 10px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          padding: 15px 25px;
+          border-radius: 15px;
+          box-shadow: 0 8px 25px rgba(0,0,0,0.2);
           z-index: 10000;
           font-weight: 900;
-          max-width: 300px;
-          text-align: center;
-          font-size: 0.9rem;
+          max-width: 350px;
+          font-size: 1rem;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.8rem;
+          border-left: 5px solid rgba(255,255,255,0.5);
         `;
         el.innerHTML = `<i class="fas fa-check-circle"></i> ${text}`;
         document.body.appendChild(el);
         setTimeout(() => {
           el.style.opacity = "0";
-          el.style.transition = "opacity 0.3s ease";
-          setTimeout(() => el.remove(), 300);
-        }, 2000);
+          el.style.transition = "opacity 0.5s ease";
+          setTimeout(() => el.remove(), 500);
+        }, 2500);
       }
     }
 
     // ==================== INIT ====================
-    let carritoTemu;
+    let carritoPremium;
     document.addEventListener("DOMContentLoaded", () => {
-      carritoTemu = new CarritoFlotanteTemu();
+      carritoPremium = new CarritoFlotantePremium();
     });
   </script>
 </body>
