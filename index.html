@@ -324,15 +324,6 @@
       border-color: rgba(210,105,30,.55);
     }
 
-    .badge-stock-temu, .badge-promo-temu{
-      position:absolute; top:10px; z-index:2;
-      color:#fff; font-size:.7rem; font-weight:900;
-      padding:.2rem .55rem; border-radius: 999px;
-      letter-spacing:.2px;
-    }
-    .badge-stock-temu{right:10px; background: var(--rojo-temu);}
-    .badge-promo-temu{left:10px; background: var(--naranja-temu);}
-
     .img-placeholder-temu{
       width:100%; height:140px;
       background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
@@ -359,17 +350,6 @@
 
     .precio-temu{font-weight:900;font-size:1.25rem;color:var(--rojo-temu);margin:.5rem 0 .3rem 0;}
     .precio-original-temu{font-size:.85rem; color:#999; text-decoration:line-through; margin-right:.3rem;}
-    .envio-gratis-temu{
-      display:inline-block;
-      background: var(--verde-temu);
-      color:#fff;
-      font-size:.7rem;
-      padding:.15rem .45rem;
-      border-radius: 6px;
-      margin-top:.2rem;
-      font-weight:900;
-      width: fit-content;
-    }
 
     .btn-agregar-temu{
       width:100%;
@@ -1165,18 +1145,14 @@
         
         let html = '';
         resultados.forEach(p => {
-          const stockBadge = p.stock <= 5 ? `<div class="badge-stock-temu">SOLO QUEDAN ${p.stock}</div>` : '';
-          const promoBadge = p.id % 5 === 0 ? `<div class="badge-promo-temu">PROMOCIÓN</div>` : '';
+          // SE ELIMINARON LOS BADGES DE STOCK, PROMOCIÓN Y ENVÍO GRATIS
           const precioOriginal = p.id % 3 === 0 ? Math.round(p.precio * 1.2) : null;
-          const envioGratis = p.precio >= 12000 ? '<div class="envio-gratis-temu">ENVÍO GRATIS</div>' : '';
           
           const iconoCategoria = `fa-${p.categoriaIcono}`;
           
           html += `
             <article class="resultado-item" aria-label="${p.nombre}">
               <div class="badge-categoria">${p.categoriaNombre}</div>
-              ${stockBadge}
-              ${promoBadge}
               <div class="img-placeholder-temu" aria-hidden="true">
                 <i class="fas ${iconoCategoria}"></i>
               </div>
@@ -1193,8 +1169,6 @@
                 ${precioOriginal ? `<span class="precio-original-temu">${money(precioOriginal)}</span>` : ''}
                 ${money(p.precio)}
               </div>
-              
-              ${envioGratis}
               
               <button class="btn-agregar-temu"
                       data-id="${p.id}"
@@ -1247,10 +1221,8 @@
                  id="categoria-${cat.id}" aria-label="${cat.nombre}">
           <div class="grid-productos">
             ${cat.productos.map(p => {
-              const stockBadge = p.stock <= 5 ? `<div class="badge-stock-temu">SOLO QUEDAN ${p.stock}</div>` : '';
-              const promoBadge = p.id % 5 === 0 ? `<div class="badge-promo-temu">PROMOCIÓN</div>` : '';
+              // SE ELIMINARON LOS BADGES DE STOCK, PROMOCIÓN Y ENVÍO GRATIS
               const precioOriginal = p.id % 3 === 0 ? Math.round(p.precio * 1.2) : null;
-              const envioGratis = p.precio >= 12000 ? '<div class="envio-gratis-temu">ENVÍO GRATIS</div>' : '';
 
               const iconoCategoria =
                 cat.icono === 'glass-whiskey' ? 'fa-glass-whiskey' :
@@ -1262,8 +1234,6 @@
 
               return `
                 <article class="producto-temu" aria-label="${p.nombre}">
-                  ${stockBadge}
-                  ${promoBadge}
                   <div class="img-placeholder-temu" aria-hidden="true">
                     <i class="fas ${iconoCategoria}"></i>
                   </div>
@@ -1280,8 +1250,6 @@
                     ${precioOriginal ? `<span class="precio-original-temu">${money(precioOriginal)}</span>` : ''}
                     ${money(p.precio)}
                   </div>
-
-                  ${envioGratis}
 
                   <button class="btn-agregar-temu"
                           data-id="${p.id}"
